@@ -79,9 +79,9 @@
     }
   },
   "variables":{
-    "databaseName":"[concat(parameters('appName'), 'database')]",
-    "serverName":"[concat(parameters('appName'), 'pgserver')]",
-    "hostingPlanName":"[concat(parameters('appName'), 'serviceplan')]",
+    "databaseName":"[concat(parameters('appName'), 'Db')]",
+    "serverName":"[concat(parameters('appName'), 'PgServer')]",
+    "hostingPlanName":"[concat(parameters('appName'), 'ServicePlan')]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
     }
