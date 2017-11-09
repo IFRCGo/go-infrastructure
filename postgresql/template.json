@@ -2,7 +2,7 @@
   "$schema":"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion":"1.0.0.0",
   "parameters":{
-    "dbName":{
+    "appName":{
       "type":"string",
       "metadata":{
         "description":"Name of azure web app"
@@ -79,9 +79,9 @@
     }
   },
   "variables":{
-    "databaseName":"[concat(parameters('dbName'), 'Db')]",
-    "serverName":"[concat(parameters('dbName'), 'PgServer')]",
-    "hostingPlanName":"[concat(parameters('dbName'), 'ServicePlan')]",
+    "databaseName":"[concat(parameters('appName'), 'Db')]",
+    "serverName":"[concat(parameters('appName'), 'PgServer')]",
+    "hostingPlanName":"[concat(parameters('appName'), 'ServicePlan')]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
     }
@@ -89,7 +89,7 @@
   "resources":[
     {
     "type":"Microsoft.Web/sites",
-    "name":"[parameters('dbName')]",
+    "name":"[parameters('appName')]",
     "dependsOn":[
       "[variables('hostingPlanName')]"
     ],
@@ -104,7 +104,7 @@
         }
         ]
       },
-      "name":"[parameters('dbName')]",
+      "name":"[parameters('appName')]",
       "serverFarmId":"[variables('hostingPlanName')]",
       "hostingEnvironment":""
     },

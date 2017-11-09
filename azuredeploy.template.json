@@ -37,9 +37,15 @@
         "contentVersion": "1.0.0.0"
       },
       "parameters": {
-        "dbName": "[parameters('dbName')]",
-        "administratorLogin": "[parameters('dbAdministratorLogin')]",
-        "administratorLoginPassword": "[parameters('dbAdministratorLoginPassword')]"
+        "appName": {
+          "value": "[parameters('dbName')]"
+        },
+        "administratorLogin": {
+          "value": "[parameters('dbAdministratorLogin')]"
+        },
+        "administratorLoginPassword": {
+          "value": "[parameters('dbAdministratorLoginPassword')]"
+        }
       }
     }
   }]
