@@ -10,8 +10,6 @@ program
   .option('-b, --branch <s>', 'Current git branch')
   .parse(process.argv)
 
-console.log(program.parameters)
-console.log(program.branch)
 var parametersFilePath = path.join(__dirname, (program.parameters || 'dev') + '.json')
 var outputDirectory = path.join(__dirname, '..', '.tmp')
 
@@ -22,5 +20,6 @@ function makeParametersFile () {
   params.parameters = Object.assign(params.parameters || {}, {
     gitBranch: { value: program.branch }
   })
+  console.log('Creating .tmp/params.json')
   fs.writeFileSync(path.join(outputDirectory, 'params.json'), JSON.stringify(params))
 }

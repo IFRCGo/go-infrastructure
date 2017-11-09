@@ -2,6 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "gitBranch": {
+      "type": "string",
+      "metadata": {
+        "description": "The current git branch this is running on"
+      }
+    },
     "dbName": {
       "type": "string"
     },
@@ -17,7 +23,7 @@
   },
   "variables": {
     "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
-    "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBanch'), '/')]",
+    "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBranch'), '/')]",
     "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]"
   },
   "resources": [{
