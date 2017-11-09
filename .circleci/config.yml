@@ -23,3 +23,12 @@ jobs:
       - run:
           name: Validate Deployment
           command: yarn validate
+
+      - run:
+          name: Deploy
+          command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                yarn deploy
+              else
+                echo "Skipping deployment"
+              fi
