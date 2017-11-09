@@ -1,2 +1,4 @@
-**/*.parameters.json
+node_modules
+parameters/*.json
 .azure-credentials
+.tmp

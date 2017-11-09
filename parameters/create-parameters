@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var path = require('path')
+var program = require('commander')
+var mkdirp = require('mkdirp')
+
+program
+  .option('-p, --parameters <s>', 'Name of parameters file')
+  .option('-b, --branch <s>', 'Current git branch')
+  .parse(process.argv)
+
+var parametersFilePath = path.join(__dirname, (program.parameters || 'dev') + '.json')
+var outputDirectory = path.join(__dirname, '..', '.tmp')
+
+mkdirp(outputDirectory, makeParametersFile)
+
+function makeParametersFile () {
+  var params = JSON.parse(fs.readFileSync(parametersFilePath))
+  params.parameters = Object.assign(params.parameters || {}, {
+    gitBranch: { value: program.branch }
+  })
+  console.log('Creating .tmp/params.json')
+  fs.writeFileSync(path.join(outputDirectory, 'params.json'), JSON.stringify(params))
+}
