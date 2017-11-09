@@ -1,2 +1,3 @@
 **/*.parameters.json
 .azure-credentials
+.tmp
