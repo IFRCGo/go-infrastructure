@@ -10,7 +10,7 @@ source ./.azure-credentials && az login --username $AZURE_USER --password $AZURE
 az group deployment create \
     --debug \
     --mode Incremental \
-    --name dsGoDb \
+    --name dsGoInfrastructure \
     --resource-group IFRCGOLabs \
-    --template-file postgresql/azuredeploy.json \
+    --template-file azuredeploy.template.json \
     --parameters @.tmp/params.json

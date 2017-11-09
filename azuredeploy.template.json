@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dbName": {
+      "type": "string"
+    },
+    "dbAdministratorLogin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dbAdministratorLoginPassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "maxLength": 128
+    }
+  },
+  "variables": {
+    "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
+    "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBanch'), '/')]",
+    "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]"
+  },
+  "resources": [{
+    "apiVersion": "2017-05-10",
+    "name": "linkedTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('pgsqlTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "dbName": "[parameters('dbName')]",
+        "administratorLogin": "[parameters('dbAdministratorLogin')]",
+        "administratorLoginPassword": "[parameters('dbAdministratorLoginPassword')]"
+      }
+    }
+  }]
+}
