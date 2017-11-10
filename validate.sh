@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export GIT_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
-source ./.azure-credentials
 ./parameters/create-parameters -b $GIT_BRANCH -p dev
 
 az login --username $AZURE_USER --password $AZURE_PASS
