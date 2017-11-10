@@ -17,9 +17,19 @@ mkdirp(outputDirectory, makeParametersFile)
 
 function makeParametersFile () {
   var params = JSON.parse(fs.readFileSync(parametersFilePath))
+
+  // add git branch to parameters
   params.parameters = Object.assign(params.parameters || {}, {
     gitBranch: { value: program.branch }
   })
+
+  // substitute environmental variables
+  for (let k in params.parameters) {
+    if (process.env[k]) {
+      params.parameters[k].value = process.env[k]
+    }
+  }
+
   console.log('Creating .tmp/params.json')
   fs.writeFileSync(path.join(outputDirectory, 'params.json'), JSON.stringify(params))
 }

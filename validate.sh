@@ -1,9 +1,10 @@
 #!/bin/bash
 
 export GIT_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+source ./.azure-credentials
 ./parameters/create-parameters -b $GIT_BRANCH -p dev
 
-source ./.azure-credentials && az login --username $AZURE_USER --password $AZURE_PASS
+az login --username $AZURE_USER --password $AZURE_PASS
 az group deployment validate \
     --mode Incremental \
     --resource-group IFRCGOLabs \
