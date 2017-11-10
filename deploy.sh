@@ -6,7 +6,7 @@
 export GIT_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 ./parameters/create-parameters -b $GIT_BRANCH -p dev
 
-source ./.azure-credentials && az login --username $AZURE_USER --password $AZURE_PASS
+az login --username $AZURE_USER --password $AZURE_PASS
 az group deployment create \
     --debug \
     --mode Incremental \
