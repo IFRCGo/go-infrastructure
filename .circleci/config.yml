@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: liamdawson/azure-core-node-builder
+      - image: developmentseed/circleci:node8.9-azure-cli
 
     steps:
       - checkout
