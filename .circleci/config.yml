@@ -22,13 +22,13 @@ jobs:
 
       - run:
           name: Validate Deployment
-          command: validate.sh
+          command: ./validate.sh
 
       - run:
           name: Deploy
           command: |
               if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                deploy.sh
+                ./deploy.sh
               else
                 echo "Skipping deployment"
               fi
