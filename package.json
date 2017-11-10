@@ -2,10 +2,14 @@
   "name": "go-infrastructure",
   "version": "1.0.0",
   "description": "Cloud deployment template generator for IFRC GO",
-  "main": "index.js",
+  "main": "deploy.sh",
   "repository": "git@github.com:IFRCGo/go-infrastructure.git",
   "author": "Derek Lieu <dl@dereklieu.com>",
   "license": "MIT",
+  "scripts": {
+    "deploy": "./deploy.sh",
+    "validate": "./validate.sh"
+  },
   "dependencies": {
     "commander": "^2.11.0",
     "mkdirp": "^0.5.1"
