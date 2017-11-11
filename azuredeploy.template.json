@@ -19,12 +19,16 @@
       "type": "securestring",
       "minLength": 8,
       "maxLength": 128
+    },
+    "functionsName": {
+      "type": "string"
     }
   },
   "variables": {
     "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
     "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBranch'), '/')]",
-    "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]"
+    "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]",
+    "functionsTemplate": "[concat(variables('baseTemplateUrl'), 'functions/template.json')]"
   },
   "resources": [{
     "apiVersion": "2017-05-10",
@@ -39,6 +43,28 @@
       "parameters": {
         "appName": {
           "value": "[parameters('dbName')]"
+        },
+        "administratorLogin": {
+          "value": "[parameters('dbAdministratorLogin')]"
+        },
+        "administratorLoginPassword": {
+          "value": "[parameters('dbAdministratorLoginPassword')]"
+        }
+      }
+    }
+  }, {
+    "apiVersion": "2017-05-10",
+    "name": "linkedTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('functionsTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('functionsName')]"
         },
         "administratorLogin": {
           "value": "[parameters('dbAdministratorLogin')]"

@@ -10,6 +10,9 @@
     },
     "dbAdministratorLoginPassword": {
       "value": ""
-    }
+    },
+    "functionsName": {
+      "value": "dsGoFunctions"
+    },
   }
 }
