@@ -52,10 +52,14 @@
   "variables": {
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[concat(parameters('appName'), 'Plan')]",
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]"
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]",
+    "appTags":{
+      "ds-project":"ifrcgo-infrastructure"
+    }
   },
   "resources": [{
     "type": "Microsoft.Storage/storageAccounts",
+    "tags":"[variables('appTags')]",
     "kind": "storage",
     "name": "[variables('storageAccountName')]",
     "apiVersion": "2017-06-01",
@@ -65,6 +69,7 @@
     }
   }, {
     "type": "Microsoft.Web/serverfarms",
+    "tags":"[variables('appTags')]",
     "apiVersion": "2015-04-01",
     "name": "[variables('hostingPlanName')]",
     "location": "[resourceGroup().location]",
@@ -76,6 +81,7 @@
   }, {
     "apiVersion": "2015-08-01",
     "type": "Microsoft.Web/sites",
+    "tags":"[variables('appTags')]",
     "name": "[variables('functionAppName')]",
     "location": "[resourceGroup().location]",
     "kind": "functionapp",

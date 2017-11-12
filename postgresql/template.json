@@ -91,7 +91,7 @@
     "type":"Microsoft.Web/sites",
     "name":"[parameters('appName')]",
     "dependsOn":[
-      "[variables('hostingPlanName')]"
+      "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
     ],
     "properties":{
       "siteConfig":{
