@@ -8,7 +8,6 @@ export GIT_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 az login --username $AZURE_USER --password $AZURE_PASS
 az group deployment create \
-    --debug \
     --mode Incremental \
     --name dsGoInfrastructure \
     --resource-group IFRCGOLabs \
