@@ -80,7 +80,7 @@
   },
   "variables":{
     "databaseName":"[concat(parameters('appName'), 'Db')]",
-    "serverName":"[concat(parameters('appName'), 'PgServer')]",
+    "serverName":"[concat(parameters('appName'), '-server')]",
     "hostingPlanName":"[concat(parameters('appName'), 'ServicePlan')]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
