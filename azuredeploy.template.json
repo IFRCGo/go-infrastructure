@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "gitBranch": {
+      "type": "string",
+      "metadata": {
+        "description": "The current git branch this is running on"
+      }
+    },
+    "dbName": {
+      "type": "string"
+    },
+    "dbAdministratorLogin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dbAdministratorLoginPassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "functionsName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
+    "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBranch'), '/')]",
+    "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]",
+    "functionsTemplate": "[concat(variables('baseTemplateUrl'), 'functions/template.json')]"
+  },
+  "resources": [{
+    "apiVersion": "2017-05-10",
+    "name": "linkedPgsqlTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('pgsqlTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('dbName')]"
+        },
+        "administratorLogin": {
+          "value": "[parameters('dbAdministratorLogin')]"
+        },
+        "administratorLoginPassword": {
+          "value": "[parameters('dbAdministratorLoginPassword')]"
+        }
+      }
+    }
+  }, {
+    "apiVersion": "2017-05-10",
+    "name": "linkedFunctionsTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('functionsTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('functionsName')]"
+        }
+      }
+    }
+  }]
+}

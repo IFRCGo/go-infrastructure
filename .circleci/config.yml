@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: developmentseed/circleci:node8.9-azure-cli
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - ifrcgo-infrastructure-{{ .Branch }}-{{ checksum "package.json" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install
+
+      - save_cache:
+          key: ifrcgo-infrastructure-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Validate Deployment
+          command: ./validate.sh
+
+      - run:
+          name: Deploy
+          command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                ./deploy.sh
+              else
+                echo "Skipping deployment"
+              fi
