@@ -52,5 +52,21 @@
         }
       }
     }
+  }, {
+    "apiVersion": "2017-05-10",
+    "name": "linkedFunctionsTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('functionsTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('functionsName')]"
+        }
+      }
+    }
   }]
 }
