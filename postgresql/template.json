@@ -79,7 +79,7 @@
     }
   },
   "variables":{
-    "databaseName":"[concat(parameters('appName'), '-db')]",
+    "databaseName":"[concat(parameters('appName'), 'db')]",
     "serverName":"[concat(parameters('appName'), '-server')]",
     "hostingPlanName":"[concat(parameters('appName'), '-serviceplan')]",
     "appTags":{
