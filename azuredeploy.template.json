@@ -32,17 +32,23 @@
   },
   "resources": [{
     "apiVersion": "2017-05-10",
-    "name": "linkedFunctionsTemplate",
+    "name": "linkedPgsqlTemplate",
     "type": "Microsoft.Resources/deployments",
     "properties": {
       "mode": "incremental",
       "templateLink": {
-        "uri": "[variables('functionsTemplate')]",
+        "uri": "[variables('pgsqlTemplate')]",
         "contentVersion": "1.0.0.0"
       },
       "parameters": {
         "appName": {
-          "value": "[parameters('functionsName')]"
+          "value": "[parameters('dbName')]"
+        },
+        "administratorLogin": {
+          "value": "[parameters('dbAdministratorLogin')]"
+        },
+        "administratorLoginPassword": {
+          "value": "[parameters('dbAdministratorLoginPassword')]"
         }
       }
     }
