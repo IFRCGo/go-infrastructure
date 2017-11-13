@@ -86,8 +86,26 @@
       "ds-project":"ifrcgo-infrastructure"
     }
   },
-  "resources":[
-    {
+  "resources":[{
+    "type":"Microsoft.Web/serverfarms",
+    "apiVersion": "2016-09-01",
+    "tags":"[variables('appTags')]",
+    "name":"[variables('hostingPlanName')]",
+    "location":"[resourceGroup().location]",
+    "properties":{
+      "name":"[variables('hostingPlanName')]",
+      "workerSizeId":"1",
+      "reserved":true,
+      "numberOfWorkers":"1",
+      "hostingEnvironment":""
+    },
+    "sku":{
+      "Tier":"Basic",
+      "Name":"B1"
+    },
+    "kind":"linux"
+  },
+  {
     "type":"Microsoft.Web/sites",
     "name":"[parameters('appName')]",
     "dependsOn":[
@@ -111,25 +129,6 @@
     "apiVersion":"2016-08-01",
     "tags":"[variables('appTags')]",
     "location":"[resourceGroup().location]"
-  },
-  {
-    "apiVersion":"2016-09-01",
-    "tags":"[variables('appTags')]",
-    "name":"[variables('hostingPlanName')]",
-    "type":"Microsoft.Web/serverfarms",
-    "location":"[resourceGroup().location]",
-    "properties":{
-      "name":"[variables('hostingPlanName')]",
-      "workerSizeId":"1",
-      "reserved":true,
-      "numberOfWorkers":"1",
-      "hostingEnvironment":""
-    },
-    "sku":{
-      "Tier":"Standard",
-      "Name":"S1"
-    },
-    "kind":"linux"
   },
   {
     "apiVersion":"2016-02-01-privatepreview",
