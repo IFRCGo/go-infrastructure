@@ -79,9 +79,9 @@
     }
   },
   "variables":{
-    "databaseName":"[concat(parameters('appName'), 'Db')]",
+    "databaseName":"[concat(parameters('appName'), '-db')]",
     "serverName":"[concat(parameters('appName'), '-server')]",
-    "hostingPlanName":"[concat(parameters('appName'), 'ServicePlan')]",
+    "hostingPlanName":"[concat(parameters('appName'), '-serviceplan')]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
     }
@@ -105,7 +105,7 @@
         ]
       },
       "name":"[parameters('appName')]",
-      "serverFarmId":"[variables('hostingPlanName')]",
+      "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
       "hostingEnvironment":""
     },
     "apiVersion":"2016-08-01",
