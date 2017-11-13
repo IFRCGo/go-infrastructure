@@ -51,7 +51,7 @@
   },
   "variables": {
     "functionAppName": "[parameters('appName')]",
-    "hostingPlanName": "[concat(parameters('appName'), 'Plan')]",
+    "hostingPlanName": "[concat(parameters('appName'), '-plan')]",
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
