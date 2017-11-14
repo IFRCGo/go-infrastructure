@@ -101,6 +101,9 @@
           "name": "FUNCTIONS_EXTENSION_VERSION",
           "value": "~1"
         }, {
+          "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+          "value": "b47453ac-d38e-45dd-953c-eaee42ae1c46"
+        }, {
           "name": "AzureWebJobsStorage",
           "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]"
         }, {
