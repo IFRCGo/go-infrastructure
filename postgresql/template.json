@@ -99,8 +99,8 @@
       "hostingEnvironment": ""
     },
     "sku": {
-      "tier": "Standard",
-      "name": "S1"
+      "name": "S1",
+      "capacity": 1
     },
     "kind": "linux"
   },

@@ -22,13 +22,17 @@
     },
     "functionsName": {
       "type": "string"
+    },
+    "apiName": {
+      "type": "string"
     }
   },
   "variables": {
     "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
     "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBranch'), '/')]",
     "pgsqlTemplate": "[concat(variables('baseTemplateUrl'), 'postgresql/template.json')]",
-    "functionsTemplate": "[concat(variables('baseTemplateUrl'), 'functions/template.json')]"
+    "functionsTemplate": "[concat(variables('baseTemplateUrl'), 'functions/template.json')]",
+    "apiTemplate": "[concat(variables('baseTemplateUrl'), 'api/template.json')]"
   },
   "resources": [{
     "apiVersion": "2017-05-10",
@@ -65,6 +69,22 @@
       "parameters": {
         "appName": {
           "value": "[parameters('functionsName')]"
+        }
+      }
+    }
+  }, {
+    "apiVersion": "2017-05-10",
+    "name": "linkedApiTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('apiTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('apiName')]"
         }
       }
     }
