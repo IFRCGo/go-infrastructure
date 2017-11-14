@@ -53,6 +53,7 @@
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[concat(parameters('appName'), '-plan')]",
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'functions')]",
+    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
     "appTags":{
       "ds-project":"ifrcgo-infrastructure"
     }
@@ -101,13 +102,13 @@
           "value": "~1"
         }, {
           "name": "AzureWebJobsStorage",
-          "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]"
+          "value": "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
         }, {
           "name": "AzureWebJobsDashboard",
-          "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]"
+          "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
         }, {
           "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-          "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1)]"
+          "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
         }, {
           "name": "WEBSITE_CONTENTSHARE",
           "value": "[toLower(variables('functionAppName'))]"
