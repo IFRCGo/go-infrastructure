@@ -7,7 +7,7 @@
     }
   },
   "variables": {
-    "hostingPlanName": "[concat(parameters('appName'), '-plan')]",
+    "hostingPlanName": "[concat(parameters('appName'), 'plan')]",
     "appTags": {
       "ds-project": "ifrcgo-infrastructure"
     }
