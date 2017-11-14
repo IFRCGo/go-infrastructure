@@ -20,6 +20,7 @@
     "location": "[resourceGroup().location]",
     "sku": {
       "name": "S1",
+      "tier": "Standard",
       "capacity": 1
     },
     "properties": {
