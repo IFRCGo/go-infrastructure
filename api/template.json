@@ -56,8 +56,6 @@
         "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:latest",
         "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "manage.py runserver -p 80:80"
       }
-    }
-    ]
-  }
-  ]
+    }]
+  }]
 }
