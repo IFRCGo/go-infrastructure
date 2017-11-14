@@ -7,7 +7,7 @@
     }
   },
   "variables": {
-    "hostingPlanName": "[concat(parameters('appName'), 'plan')]",
+    "hostingPlanName": "[concat(parameters('appName'), '-serviceplan')]",
     "appTags": {
       "ds-project": "ifrcgo-infrastructure"
     }
@@ -19,13 +19,13 @@
     "tags": "[variables('appTags')]",
     "location": "[resourceGroup().location]",
     "sku": {
-      "name": "B1",
-      "tier": "Basic",
+      "name": "S1",
+      "tier": "Standard",
       "capacity": 1
     },
     "properties": {
       "targetWorkerSizeId": 0,
-      "reserved": true,
+      "reserved": false,
       "hostingEnvironment": ""
     },
     "kind": "linux"
