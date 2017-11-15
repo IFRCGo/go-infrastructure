@@ -58,6 +58,36 @@
         "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:latest",
         "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "manage.py runserver -p 80:80"
       }
+    }, {
+      "name": "logs",
+      "type": "config",
+      "apiVersion": "2016-03-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+        "[resourceId('Microsoft.Web/sites', parameters('appName'))]"
+      ],
+      "tags": {
+        "displayName": "appSettings"
+      },
+      "properties": {
+        "applicationLogs": {
+          "fileSystem": {
+            "level": "Verbose"
+          }
+        },
+        "httpLogs": {
+          "fileSystem": {
+            "retentionInMb": 40,
+            "enabled": true
+          }
+        },
+        "failedRequestsTracing": {
+          "enabled": true
+        },
+        "detailedErrorMessages": {
+          "enabled": true
+        }
+      }
     }]
   }]
 }
