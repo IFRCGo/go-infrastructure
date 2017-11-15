@@ -32,12 +32,14 @@
   },
   {
     "type": "Microsoft.Web/sites",
+    "kind": "app,linux",
     "name": "[parameters('appName')]",
-    "apiVersion": "2016-03-01",
+    "apiVersion": "2016-08-01",
     "tags": "[variables('appTags')]",
     "location": "[resourceGroup().location]",
     "properties": {
       "name": "[parameters('appName')]",
+      "enabled": true,
       "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
     },
     "dependsOn": [
