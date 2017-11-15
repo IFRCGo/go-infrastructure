@@ -56,7 +56,7 @@
       },
       "properties": {
         "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:latest",
-        "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "manage.py runserver -p 80:80"
+        "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "-p 80:80 runserver.sh"
       }
     }, {
       "name": "logs",
