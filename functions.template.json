@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionsName": {
+      "type": "string"
+    },
+  },
+  "variables": {
+    "rawUrl": "https://raw.githubusercontent.com/IFRCGo/go-infrastructure/",
+    "baseTemplateUrl": "[concat(variables('rawUrl'), parameters('gitBranch'), '/')]",
+    "functionsTemplate": "[concat(variables('baseTemplateUrl'), 'functions/template.json')]"
+  },
+  "resources": [{
+    "apiVersion": "2017-05-10",
+    "name": "linkedFunctionsTemplate",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "incremental",
+      "templateLink": {
+        "uri": "[variables('functionsTemplate')]",
+        "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "appName": {
+          "value": "[parameters('functionsName')]"
+        }
+      }
+    }
+  }]
+}
