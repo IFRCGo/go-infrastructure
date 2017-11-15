@@ -10,14 +10,15 @@
     "hostingPlanName": "[concat(parameters('appName'), '-serviceplan')]",
     "appTags": {
       "ds-project": "ifrcgo-infrastructure"
-    }
+    },
+    "apiLocation": "UK West"
   },
   "resources": [{
     "type": "Microsoft.Web/serverfarms",
     "name": "[variables('hostingPlanName')]",
     "apiVersion": "2016-09-01",
     "tags": "[variables('appTags')]",
-    "location": "[resourceGroup().location]",
+    "location": "[variables('apiLocation')]",
     "sku": {
       "name": "S1",
       "tier": "Standard",
@@ -36,7 +37,7 @@
     "name": "[parameters('appName')]",
     "apiVersion": "2016-08-01",
     "tags": "[variables('appTags')]",
-    "location": "[resourceGroup().location]",
+    "location": "[variables('apiLocation')]",
     "properties": {
       "name": "[parameters('appName')]",
       "enabled": true,
