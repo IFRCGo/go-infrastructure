@@ -55,7 +55,7 @@
         "displayName": "appSettings"
       },
       "properties": {
-        "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:latest",
+        "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:0.1.1",
         "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "-p 80:80 runserver.sh"
       }
     }, {
