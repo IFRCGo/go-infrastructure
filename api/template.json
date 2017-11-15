@@ -58,7 +58,8 @@
       },
       "properties": {
         "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:0.1.1",
-        "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "-p 80:80 runserver.sh"
+        "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "-p 80:80 runserver.sh",
+        "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true
       }
     }, {
       "name": "logs",
