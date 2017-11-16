@@ -103,7 +103,7 @@
           "value": "[parameters('dbAdministratorLoginPassword')]"
         },
         "DJANGO_DB_NAME": {
-          "value": "[concat(parameters('dbName'), '-server']"
+          "value": "[concat(parameters('dbName'), '-server')]"
         },
         "GO_FTPHOST": {
           "value": "[parameters('GO_FTPHOST')]"
