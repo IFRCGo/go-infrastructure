@@ -88,7 +88,7 @@
         "displayName": "appSettings"
       },
       "properties": {
-        "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:0.1.1",
+        "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:0.1.2",
         "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "runserver.sh",
         "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true,
         "DJANGO_SECRET_KEY": "[parameters('DJANGO_SECRET_KEY')]",
