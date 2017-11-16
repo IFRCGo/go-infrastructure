@@ -1,7 +1,5 @@
 #!/bin/bash
 
-az login --username $AZURE_USER --password $AZURE_PASS
-
 storagename=dsgoproxystorage
 appname=dsgoproxyapp
 region=westeurope
