@@ -4,6 +4,36 @@
   "parameters": {
     "appName": {
       "type": "string"
+    },
+    "DJANGO_SECRET_KEY": {
+      "type": "securestring"
+    },
+    "DJANGO_DB_PORT": {
+      "type": "securestring"
+    },
+    "DJANGO_DB_HOST": {
+      "type": "securestring"
+    },
+    "DJANGO_DB_USER": {
+      "type": "securestring"
+    },
+    "DJANGO_DB_PASS": {
+      "type": "securestring"
+    },
+    "DJANGO_DB_NAME": {
+      "type": "securestring"
+    },
+    "GO_FTPHOST": {
+      "type": "securestring"
+    },
+    "GO_FTPUSER": {
+      "type": "securestring"
+    },
+    "GO_FTPPASS": {
+      "type": "securestring"
+    },
+    "GO_DBPASS": {
+      "type": "securestring"
     }
   },
   "variables": {
@@ -60,7 +90,16 @@
       "properties": {
         "DOCKER_CUSTOM_IMAGE_NAME": "developmentseed/ifrc-go-api:0.1.1",
         "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "runserver.sh",
-        "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true
+        "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true,
+        "DJANGO_SECRET_KEY": "[parameters('DJANGO_SECRET_KEY')]",
+        "DJANGO_DB_HOST": "[parameters('DJANGO_DB_HOST')]",
+        "DJANGO_DB_USER": "[parameters('DJANGO_DB_USER')]",
+        "DJANGO_DB_PASS": "[parameters('DJANGO_DB_PASS')]",
+        "DJANGO_DB_NAME": "[parameters('DJANGO_DB_NAME')]",
+        "GO_FTPHOST": "[parameters('GO_FTPHOST')]",
+        "GO_FTPUSER": "[parameters('GO_FTPUSER')]",
+        "GO_FTPPASS": "[parameters('GO_FTPPASS')]",
+        "GO_DBPASS": "[parameters('GO_DBPASS')]"
       }
     }, {
       "name": "logs",

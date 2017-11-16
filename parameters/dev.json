@@ -13,6 +13,27 @@
     },
     "apiName": {
       "value": "dsgoapi"
+    },
+    "DJANGO_SECRET_KEY": {
+      "value": ""
+    },
+    "DJANGO_DB_PORT": {
+      "value": ""
+    },
+    "DJANGO_DB_HOST": {
+      "value": ""
+    },
+    "GO_FTPHOST": {
+      "value": ""
+    },
+    "GO_FTPUSER": {
+      "value": ""
+    },
+    "GO_FTPPASS": {
+      "value": ""
+    },
+    "GO_DBPASS": {
+      "value": ""
     }
   }
 }
