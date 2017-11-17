@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var path = require('path')
+var output = {}
+var envs = [
+  'DJANGO_SECRET_KEY',
+  'DJANGO_DB_HOST',
+  'DJANGO_DB_PORT',
+  'DJANGO_DB_NAME',
+  'DJANGO_DB_USER',
+  'DJANGO_DB_PASS',
+  'GO_FTPHOST',
+  'GO_FTPUSER',
+  'GO_FTPPASS',
+  'GO_DBPASS'
+].forEach(function (env) {
+  output[env] = process.env[env]
+})
+
+fs.writeFileSync(path.join(__dirname, '.tmp', 'private.json'), JSON.stringify(output))
