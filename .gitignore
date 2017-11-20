@@ -1,4 +1,5 @@
 node_modules
 .azure-credentials
+.env
 .tmp
 *.swp
