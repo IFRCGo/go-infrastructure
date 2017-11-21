@@ -21,14 +21,10 @@ jobs:
             - node_modules
 
       - run:
-          name: Validate Deployment
-          command: ./validate.sh
-
-      - run:
           name: Deploy
           command: |
               if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                ./deploy.sh
+                echo "No deployment yet"
               else
                 echo "Skipping deployment"
               fi
