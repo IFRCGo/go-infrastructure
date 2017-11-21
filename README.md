@@ -2,7 +2,12 @@
 
 # Go Infrastructure
 
-Circle CI will test on merge to `develop`, and deploy on merge to `master`.
+## Logging in
+
+```(bash)
+source .env
+source bin/login
+```
 
 ### Notes
 
