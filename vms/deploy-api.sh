@@ -5,7 +5,7 @@ export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
 
 mkdir -p .tmp
 az storage blob download \
-  --container-name dsgoapikey \
+  --container-name $KEY_CONTAINER \
   --name api.pub \
   --file .tmp/key
 
@@ -45,7 +45,7 @@ az network vnet subnet create \
 
 
 # Create the NSG
-GO_NSG="dsgoapiNSG"
+GO_NSG="dsgoNSG"
 az network nsg create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -53,7 +53,7 @@ az network nsg create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-# open port 80 on the API
+# open port 80 for HTTP traffic
 az network nsg rule create \
   --resource-group $RESOURCE_GROUP \
   --nsg-name $GO_NSG \
@@ -66,13 +66,6 @@ az network nsg rule create \
   --source-port-range "*" \
   --destination-address-prefix "*" \
   --destination-port-range 80
-
-
-#az network vnet subnet update \
-  #--vnet-name $VNET_NAME \
-  #--name Frontend \
-  #--resource-group $RESOURCE_GROUP \
-  #--network-security-group $GO_NSG
 
 
 API_NIC="dsgoapiPublicVMNIC"

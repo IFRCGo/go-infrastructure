@@ -47,7 +47,7 @@ az network vnet subnet create \
 
 
 # Create the NSG
-GO_NSG="dsgoesNSG"
+GO_NSG="dsgoNSG"
 az network nsg create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -68,13 +68,6 @@ az network nsg rule create \
   --source-port-range "*" \
   --destination-address-prefix "*" \
   --destination-port-range 80
-
-
-#az network vnet subnet update \
-  #--vnet-name $VNET_NAME \
-  #--name Frontend \
-  #--resource-group $RESOURCE_GROUP \
-  #--network-security-group $GO_NSG
 
 
 ES_NIC="dsgoesPublicVMNIC"
