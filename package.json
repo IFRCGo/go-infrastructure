@@ -6,12 +6,5 @@
   "repository": "git@github.com:IFRCGo/go-infrastructure.git",
   "author": "Derek Lieu <dl@dereklieu.com>",
   "license": "MIT",
-  "scripts": {
-    "deploy": "source .azure-credentials && ./deploy.sh",
-    "validate": "source .azure-credentials && ./validate.sh"
-  },
-  "dependencies": {
-    "commander": "^2.11.0",
-    "mkdirp": "^0.5.1"
-  }
+  "dependencies": {}
 }
