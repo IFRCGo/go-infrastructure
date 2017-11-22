@@ -8,9 +8,12 @@ az storage account create \
   --tags 'ds-project=ifrcgo-infrastructure' \
   --sku Standard_LRS
 
-CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
-
 echo "Creating key storage container"
 az storage container create \
   --name $KEY_CONTAINER \
   --public-access off
+
+echo "Creating frontend storage container"
+az storage container create \
+  --name site \
+  --public-access blob

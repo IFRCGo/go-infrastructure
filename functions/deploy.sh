@@ -13,7 +13,7 @@ az functionapp create \
   --resource-group $RESOURCE_GROUP
 
 az functionapp deployment source config \
-  --name $appname \
+  --name $PROXY_APP_NAME \
   --repo-url https://github.com/developmentseed/go-functions \
   --branch master \
   --resource-group $RESOURCE_GROUP
