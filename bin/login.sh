@@ -16,7 +16,7 @@ export DJANGO_DB_HOST="$DB_SERVER_NAME.postgres.database.azure.com"
 export DJANGO_DB_PORT="5432"
 export DJANGO_DB_NAME="postgres"
 export DJANGO_DB_USER="$dbAdministratorLogin@$DB_SERVER_NAME"
-export DJANGO_DB_PASS="$dbAdministratorLogin"
+export DJANGO_DB_PASS="$dbAdministratorLoginPassword"
 
 # Azure file storage connection
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
