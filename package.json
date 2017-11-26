@@ -6,5 +6,9 @@
   "repository": "git@github.com:IFRCGo/go-infrastructure.git",
   "author": "Derek Lieu <dl@dereklieu.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "dirty-reprojectors": "^0.0.1",
+    "mapshaper": "^0.4.58"
+  }
 }
