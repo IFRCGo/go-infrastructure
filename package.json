@@ -9,6 +9,9 @@
   "dependencies": {},
   "devDependencies": {
     "dirty-reprojectors": "^0.0.1",
-    "mapshaper": "^0.4.58"
+    "geojson-stream": "^0.0.1",
+    "mapshaper": "^0.4.58",
+    "minimist": "^1.2.0",
+    "through2": "^2.0.3"
   }
 }
