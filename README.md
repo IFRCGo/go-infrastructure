@@ -53,6 +53,12 @@ source bin/login
 ./db/deploy.sh
 ```
 
+### Create PostGIS and other extensions
+
+```(bash)
+./db/extend.sh
+```
+
 ## Deploy API and Elasticsearch VMS
 
 ```(bash)
