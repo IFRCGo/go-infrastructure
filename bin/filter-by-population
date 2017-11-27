@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const geojsonStream = require('geojson-stream')
+const through = require('through2')
+
+const argv = require('minimist')(process.argv.slice(2), {
+  alias: {
+    t: 'threshold'
+  }
+})
+
+process.stdin.pipe(geojsonStream.parse())
+.pipe(through.obj(write))
+.pipe(geojsonStream.stringify())
+.pipe(process.stdout)
+
+function write (feature, _, next) {
+  if (feature.properties.pop_max >= argv.threshold) {
+    this.push(feature)
+  }
+  next()
+}

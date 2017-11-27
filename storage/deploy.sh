@@ -17,3 +17,8 @@ echo "Creating frontend storage container"
 az storage container create \
   --name site \
   --public-access blob
+
+echo "Creating tile storage container"
+az storage container create \
+  --name tiles \
+  --public-access blob
