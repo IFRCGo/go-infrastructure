@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TMP_DIR=tmp/tiles
+TMP_DIR=.tmp/tiles
 rm -rf $TMP_DIR
 
 mkdir -p $TMP_DIR
@@ -63,7 +63,7 @@ echo ""
 echo "Generating tiles"
 for i in ${!SIMPLIFICATION[@]}; do
   PCT_SIMPLIFICATION=${SIMPLIFICATION[$i]}
-  DIR=$TMP_DIR/$PCT_SIMPLIFICATION
+  SOURCE_DIR=$TMP_DIR/$PCT_SIMPLIFICATION
   OUTPUT_DIR=$TMP_DIR/output/$PCT_SIMPLIFICATION
   mkdir -p $OUTPUT_DIR
   MIN_ZOOM=${MIN_ZOOMS[$i]}
@@ -73,12 +73,20 @@ for i in ${!SIMPLIFICATION[@]}; do
   echo $MAX_ZOOM
 
   tippecanoe --projection EPSG:4326 \
-    --named-layer=country:$DIR/robinson-country.geojson \
-    --named-layer=population:$DIR/robinson-population.geojson \
+    --named-layer=country:$SOURCE_DIR/robinson-country.geojson \
+    --named-layer=population:$SOURCE_DIR/robinson-population.geojson \
     --drop-rate=0 \
     --output-to-directory=$OUTPUT_DIR \
     --no-tile-compression \
     --maximum-zoom=$MAX_ZOOM \
     --minimum-zoom=$MIN_ZOOM
+done
 
+echo ""
+echo "Moving generated tiles to output"
+OUTPUT_DIR=tiles/output
+for PCT_SIMPLIFICATION in ${SIMPLIFICATION[@]}; do
+  SOURCE_DIR=$TMP_DIR/output/$PCT_SIMPLIFICATION
+  mv $SOURCE_DIR/metadata.json $SOURCE_DIR/metadata-$PCT_SIMPLIFICATION.json
+  cp -a $SOURCE_DIR/* $OUTPUT_DIR
 done
