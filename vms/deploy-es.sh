@@ -55,19 +55,19 @@ az network nsg create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-# open port 80 on the API
+# open port 9200 for HTTP traffic
 az network nsg rule create \
   --resource-group $RESOURCE_GROUP \
   --nsg-name $GO_NSG \
-  --name 'web-rule' \
+  --name 'AllowESHttp' \
   --access allow \
   --protocol Tcp \
   --direction Inbound \
-  --priority 200 \
+  --priority 300 \
   --source-address-prefix "Internet" \
   --source-port-range "*" \
   --destination-address-prefix "*" \
-  --destination-port-range 80
+  --destination-port-range 9200
 
 
 ES_NIC="dsgoesPublicVMNIC"
