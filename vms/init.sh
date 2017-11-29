@@ -29,6 +29,8 @@ echo "GO_FTPHOST=$GO_FTPHOST" >> .tmp/env
 echo "GO_FTPUSER=$GO_FTPUSER" >> .tmp/env
 echo "GO_FTPPASS=$GO_FTPPASS" >> .tmp/env
 echo "GO_DBPASS=$GO_DBPASS" >> .tmp/env
+echo "APPEALS_USER=$APPEALS_USER" >> .tmp/env
+echo "APPEALS_PASS=$APPEALS_PASS" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP #docker run -d -p 80:80 --env-file .env -t $2
