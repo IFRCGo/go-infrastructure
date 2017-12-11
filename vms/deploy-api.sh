@@ -68,6 +68,21 @@ az network nsg rule create \
   --destination-port-range 80
 
 
+# open port 9200 for HTTP traffic
+az network nsg rule create \
+  --resource-group $RESOURCE_GROUP \
+  --nsg-name $GO_NSG \
+  --name 'AllowESHttp' \
+  --access allow \
+  --protocol Tcp \
+  --direction Inbound \
+  --priority 300 \
+  --source-address-prefix "Internet" \
+  --source-port-range "*" \
+  --destination-address-prefix "*" \
+  --destination-port-range 9200
+
+
 API_NIC="dsgoapiPublicVMNIC"
 az network nic create \
   --name $API_NIC \
