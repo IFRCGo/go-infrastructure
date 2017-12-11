@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+const geojsonStream = require('geojson-stream')
+const through = require('through2')
+
+obj = {}
+process.stdin.pipe(geojsonStream.parse())
+.pipe(through.obj(write))
+.on('finish', () => console.log(obj))
+
+function write (feature, _, next) {
+  obj[feature.properties.iso] = feature.geometry.coordinates
+  next()
+}
