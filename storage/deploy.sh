@@ -22,3 +22,8 @@ echo "Creating tile storage container"
 az storage container create \
   --name tiles \
   --public-access blob
+
+echo "Creating api storage container"
+az storage container create \
+  --name api \
+  --public-access blob
