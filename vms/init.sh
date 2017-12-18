@@ -32,6 +32,10 @@ echo "GO_DBPASS=$GO_DBPASS" >> .tmp/env
 echo "APPEALS_USER=$APPEALS_USER" >> .tmp/env
 echo "APPEALS_PASS=$APPEALS_PASS" >> .tmp/env
 echo "ES_HOST=$ES_HOST" >> .tmp/env
+echo "EMAIL_HOST=$EMAIL_HOST" >> .tmp/env
+echo "EMAIL_PORT=$EMAIL_PORT" >> .tmp/env
+echo "EMAIL_USER=$EMAIL_USER" >> .tmp/env
+echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP #docker run -d -p 80:80 --env-file .env -t $2
