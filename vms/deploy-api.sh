@@ -16,8 +16,6 @@ az storage blob download \
 
 
 # Create a public IP to attach to the API
-API_IP_NAME="dsgoapiPublicIP"
-API_DNS="dsgoapi"
 az network public-ip create \
   --name $API_IP_NAME \
   --resource-group $RESOURCE_GROUP \
@@ -27,7 +25,6 @@ az network public-ip create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-VNET_NAME="dsgoVnet"
 az network vnet create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -36,7 +33,6 @@ az network vnet create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-API_SUBNET="dsgoapisubnet"
 az network vnet subnet create \
   --resource-group $RESOURCE_GROUP \
   --vnet-name $VNET_NAME \
@@ -45,7 +41,6 @@ az network vnet subnet create \
 
 
 # Create the NSG
-GO_NSG="dsgoNSG"
 az network nsg create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -83,7 +78,6 @@ az network nsg rule create \
   --destination-port-range 9200
 
 
-API_NIC="dsgoapiPublicVMNIC"
 az network nic create \
   --name $API_NIC \
   --resource-group $RESOURCE_GROUP \
@@ -97,7 +91,6 @@ az network nic create \
 
 
 # Create a vm for the API
-API_NAME="dsgoapi"
 az vm create \
   --ssh-key-value @.tmp/key \
   --authentication-type ssh \

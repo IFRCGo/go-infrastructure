@@ -3,15 +3,36 @@
 az login --username $AZURE_USER --password $AZURE_PASS
 
 # Resource group and region
-export RESOURCE_GROUP="GOLAB"
 export REGION="northeurope"
 
+# Proxy apps
+export PROXY_APP_NAME=$PREFIX"dsgoproxyapp"
+export PROXY_APP_STORAGE=$PREFIX"dsgoproxystorage"
+
 # Storage config
-export STORAGE_NAME="dsgofilestorage"
+export STORAGE_NAME=$PREFIX"dsgofilestorage"
 export KEY_CONTAINER="dsgoapikey"
 
+# Shared VM config
+export VNET_NAME=$PREFIX"dsgoVnet"
+export GO_NSG=$PREFIX"dsgoNSG"
+
+# API VM
+export API_IP_NAME=$PREFIX"dsgoapiPublicIP"
+export API_DNS=$PREFIX"dsgoapi"
+export API_SUBNET=$PREFIX"dsgoapisubnet"
+export API_NIC=$PREFIX"dsgoapiPublicVMNIC"
+export API_NAME=$PREFIX"dsgoapi"
+
+# ES VM
+export ES_IP_NAME=$PREFIX"dsgoesPublicIP"
+export ES_DNS=$PREFIX"dsgoes"
+export ES_SUBNET=$PREFIX"dsgoelasticsubnet"
+export ES_NIC=$PREFIX"dsgoesPublicVMNIC"
+export ES_NAME=$PREFIX"dsgoes"
+
 # DB config
-export DB_SERVER_NAME="dsgodb20171121"
+export DB_SERVER_NAME=$PREFIX"dsgodb20171121"
 export DJANGO_DB_HOST="$DB_SERVER_NAME.postgres.database.azure.com"
 export DJANGO_DB_PORT="5432"
 export DJANGO_DB_NAME="postgres"
