@@ -31,6 +31,8 @@ export ES_SUBNET=$PREFIX"dsgoelasticsubnet"
 export ES_NIC=$PREFIX"dsgoesPublicVMNIC"
 export ES_NAME=$PREFIX"dsgoes"
 
+export ES_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
+
 # DB config
 export DB_SERVER_NAME=$PREFIX"dsgodb20171121"
 export DJANGO_DB_HOST="$DB_SERVER_NAME.postgres.database.azure.com"

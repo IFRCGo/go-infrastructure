@@ -24,9 +24,6 @@ export GO_DBPASS=""
 export APPEALS_USER=""
 export APPEALS_PASS=""
 
-# Elasticsearch
-export ES_HOST=""
-
 # SMTP settings
 export EMAIL_HOST=""
 export EMAIL_PORT=""
