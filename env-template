@@ -1,13 +1,11 @@
+export RESOURCE_GROUP=""
+
 # Azure username and credentials
 export AZURE_USER=""
 export AZURE_PASS=""
 
-# API administrator name for VM
+# API
 export API_ADMIN=""
-
-# Proxy function app config
-export PROXY_APP_NAME=""
-export PROXY_APP_STORAGE=""
 
 # Postgresql login
 export dbAdministratorLogin=""
@@ -16,7 +14,7 @@ export dbAdministratorLoginPassword=""
 # Django
 export DJANGO_SECRET_KEY=""
 
-# DMIS FTP
+# FTP
 export GO_FTPHOST=""
 export GO_FTPUSER=""
 export GO_FTPPASS=""
@@ -25,3 +23,12 @@ export GO_DBPASS=""
 # Appeals API
 export APPEALS_USER=""
 export APPEALS_PASS=""
+
+# Elasticsearch
+export ES_HOST=""
+
+# SMTP settings
+export EMAIL_HOST=""
+export EMAIL_PORT=""
+export EMAIL_USER=""
+export EMAIL_PASS=""
