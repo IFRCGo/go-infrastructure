@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if [[ ($1 = "")  || ($2 = "") ]] ; then
-   echo "Please include VM name and docker image exactly as so:"
-   echo "./init dsgoapi developmentseed/ifrc-go-api:0.1.4"
+if [[ ($1 = "") ]] ; then
+   echo "Please include VM name"
    exit 1
 fi
 
@@ -36,10 +35,9 @@ echo "EMAIL_HOST=$EMAIL_HOST" >> .tmp/env
 echo "EMAIL_PORT=$EMAIL_PORT" >> .tmp/env
 echo "EMAIL_USER=$EMAIL_USER" >> .tmp/env
 echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
-echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
-ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP docker run -d -p 80:80 --env-file .env -t $2
+ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP
 
 rm .tmp/env
 rm .tmp/key
