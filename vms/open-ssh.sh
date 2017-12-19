@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # open port 22 for SSH traffic
-GO_NSG="dsgoNSG"
 az network nsg rule create \
   --resource-group $RESOURCE_GROUP \
   --nsg-name $GO_NSG \

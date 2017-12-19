@@ -5,7 +5,7 @@ export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
 
 mkdir -p .tmp
 az storage blob download \
-  --container-name dsgoapikey \
+  --container-name $KEY_CONTAINER \
   --name api.pub \
   --file .tmp/key
 
@@ -16,8 +16,6 @@ az storage blob download \
 
 
 # Create a public IP to attach to the Elasticsearch VM
-ES_IP_NAME="dsgoesPublicIP"
-ES_DNS="dsgoes"
 az network public-ip create \
   --name $ES_IP_NAME \
   --resource-group $RESOURCE_GROUP \
@@ -27,7 +25,6 @@ az network public-ip create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-VNET_NAME="dsgoVnet"
 az network vnet create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -38,7 +35,6 @@ az network vnet create \
 
 # Create an elasticsearch subnet
 # and associate it with the virtual network
-ES_SUBNET="dsgoelasticsubnet"
 az network vnet subnet create \
   --resource-group $RESOURCE_GROUP \
   --vnet-name $VNET_NAME \
@@ -47,7 +43,6 @@ az network vnet subnet create \
 
 
 # Create the NSG
-GO_NSG="dsgoNSG"
 az network nsg create \
   --resource-group $RESOURCE_GROUP \
   --location $REGION \
@@ -85,7 +80,6 @@ az network nsg rule create \
   --destination-port-range 9200
 
 
-ES_NIC="dsgoesPublicVMNIC"
 az network nic create \
   --name $ES_NIC \
   --resource-group $RESOURCE_GROUP \
@@ -99,7 +93,6 @@ az network nic create \
 
 
 # create a vm for Elasticsearch with no public ip
-ES_NAME="dsgoes"
 az vm create \
   --ssh-key-value @.tmp/key \
   --authentication-type ssh \
