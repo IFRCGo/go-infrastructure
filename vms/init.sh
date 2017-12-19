@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if [[ ($1 = "")  || ($2 = "") ]] ; then
-   echo "Please include VM name and docker image exactly as so:"
-   echo "./init dsgoapi developmentseed/ifrc-go-api:0.1.4"
+if [[ ($1 = "") ]] ; then
+   echo "Please docker image"
    exit 1
 fi
 
@@ -17,7 +16,7 @@ az storage blob download \
 
 chmod 600 .tmp/key
 
-IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $1 --query [0].virtualMachine.network.publicIpAddresses[0].ipAddress -o tsv)"
+IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $API_NAME --query [0].virtualMachine.network.publicIpAddresses[0].ipAddress -o tsv)"
 
 echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" >> .tmp/env
 echo "DJANGO_DB_HOST=$DJANGO_DB_HOST" >> .tmp/env
@@ -39,7 +38,7 @@ echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
 echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
-ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP docker run -d -p 80:80 --env-file .env -t $2
+ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP docker run -d -p 80:80 --env-file .env -t $1
 
 rm .tmp/env
 rm .tmp/key

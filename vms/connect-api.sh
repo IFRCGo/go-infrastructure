@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [[ ($1 = "") ]] ; then
-   echo "Please include VM name"
-   exit 1
-fi
-
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
 
@@ -16,7 +11,7 @@ az storage blob download \
 
 chmod 600 .tmp/key
 
-IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $1 --query [0].virtualMachine.network.publicIpAddresses[0].ipAddress -o tsv)"
+IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $API_NAME --query [0].virtualMachine.network.publicIpAddresses[0].ipAddress -o tsv)"
 
 echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY" >> .tmp/env
 echo "DJANGO_DB_HOST=$DJANGO_DB_HOST" >> .tmp/env
