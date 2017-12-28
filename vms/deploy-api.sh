@@ -48,7 +48,7 @@ az network nsg create \
   --tags "ds-project=ifrcgo-infrastructure"
 
 
-# open port 80 for HTTP traffic
+# open port 80 for HTTP traffic to API only
 az network nsg rule create \
   --resource-group $RESOURCE_GROUP \
   --nsg-name $GO_NSG \
@@ -59,23 +59,8 @@ az network nsg rule create \
   --priority 200 \
   --source-address-prefix "Internet" \
   --source-port-range "*" \
-  --destination-address-prefix "*" \
+  --destination-address-prefix 192.168.1.101 \
   --destination-port-range 80
-
-
-# open port 9200 for HTTP traffic
-az network nsg rule create \
-  --resource-group $RESOURCE_GROUP \
-  --nsg-name $GO_NSG \
-  --name 'AllowESHttp' \
-  --access allow \
-  --protocol Tcp \
-  --direction Inbound \
-  --priority 300 \
-  --source-address-prefix "Internet" \
-  --source-port-range "*" \
-  --destination-address-prefix "*" \
-  --destination-port-range 9200
 
 
 az network nic create \
