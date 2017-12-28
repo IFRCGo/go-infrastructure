@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ ($1 = "") ]] ; then
-   echo "Please docker image"
+   echo "Please enter docker image"
    exit 1
 fi
 
