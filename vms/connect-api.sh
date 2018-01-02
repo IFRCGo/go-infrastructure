@@ -3,6 +3,9 @@
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
 
+FQDN="$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ fqdn: dnsSettings.fqdn }" | jq -r '.fqdn')"
+export API_FQDN=$FQDN
+
 mkdir -p .tmp
 az storage blob download \
   --container-name $KEY_CONTAINER \
@@ -30,6 +33,7 @@ echo "EMAIL_HOST=$EMAIL_HOST" >> .tmp/env
 echo "EMAIL_PORT=$EMAIL_PORT" >> .tmp/env
 echo "EMAIL_USER=$EMAIL_USER" >> .tmp/env
 echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
+echo "API_FQDN=$FQDN" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP

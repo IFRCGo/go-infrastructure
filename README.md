@@ -6,6 +6,7 @@
 
 - [Azure CLI 2.0](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 - [Psql CLI tool](https://www.postgresql.org/docs/9.6/static/app-psql.html)
+- [jQ](https://stedolan.github.io/jq/)
 
 ## Tile dependencies
 
