@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [[ ($1 = "") ]] ; then
-   echo "Please enter docker image"
-   exit 1
-fi
-
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
 
@@ -42,7 +37,13 @@ echo "API_FQDN=$FQDN" >> .tmp/env
 echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
-ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP docker run -d -p 80:80 --env-file .env -t $1
+scp -i .tmp/key certificates/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
+scp -i .tmp/key certificates/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
+ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
+  docker stop \$(docker ps -q)
+  docker rm \$(docker ps -a -q)
+  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem -p 80:80 -p 443:443 --env-file .env -t -d ${API_DOCKER_IMAGE}
+EOF
 
 rm .tmp/env
 rm .tmp/key
