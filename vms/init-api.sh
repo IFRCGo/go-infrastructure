@@ -42,7 +42,14 @@ echo "API_FQDN=$FQDN" >> .tmp/env
 echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
-ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP docker run -d -p 80:80 --env-file .env -t $1
+scp -i .tmp/key certificates/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
+scp -i .tmp/key certificates/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
+ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP cat $(pwd)/.ifrcgoapi.crt && docker run -d \
+  -v $(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem \
+  -v $(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem \
+  -p 80:80 -p 443:443 \
+  --env-file .env \
+  -t $1
 
 rm .tmp/env
 rm .tmp/key

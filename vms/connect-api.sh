@@ -36,6 +36,8 @@ echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
 echo "API_FQDN=$FQDN" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
+scp -i .tmp/key certificates/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
+scp -i .tmp/key certificates/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP
 
 rm .tmp/env

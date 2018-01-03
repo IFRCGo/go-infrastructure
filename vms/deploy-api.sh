@@ -63,6 +63,21 @@ az network nsg rule create \
   --destination-port-range 80
 
 
+# open port 443 for HTTPS traffic to API only
+az network nsg rule create \
+  --resource-group $RESOURCE_GROUP \
+  --nsg-name $GO_NSG \
+  --name 'AllowHttp' \
+  --access allow \
+  --protocol Tcp \
+  --direction Inbound \
+  --priority 200 \
+  --source-address-prefix "Internet" \
+  --source-port-range "*" \
+  --destination-address-prefix 192.168.1.101 \
+  --destination-port-range 443
+
+
 az network nic create \
   --name $API_NIC \
   --resource-group $RESOURCE_GROUP \
