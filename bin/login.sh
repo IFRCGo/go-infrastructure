@@ -17,6 +17,10 @@ export KEY_CONTAINER="dsgoapikey"
 export VNET_NAME=$PREFIX"dsgoVnet"
 export GO_NSG=$PREFIX"dsgoNSG"
 
+# CDN
+export CDN_NAME=$PREFIX"dsgoCdn"
+export CDN_API_ENDPOINT_NAME=$PREFIX"dsgocdnapi"
+
 # API VM
 export API_IP_NAME=$PREFIX"dsgoapiPublicIP"
 export API_DNS=$PREFIX"dsgoapi"
