@@ -24,5 +24,7 @@ source ./vms/init-api.sh $1
 source ./vms/init-es.sh
 source ./vms/close-ssh.sh
 
+source ./cdn/deploy.sh
+
 source ./functions/deploy.sh
 source ./functions/tag.sh
