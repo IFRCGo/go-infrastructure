@@ -11,6 +11,7 @@ az cdn profile create --name $CDN_NAME \
 
 
 az cdn endpoint create --name $CDN_API_ENDPOINT_NAME \
+  --query-string-caching UseQueryString \
   --origin $FQDN 80 443 \
   --profile-name $CDN_NAME \
   --resource-group $RESOURCE_GROUP
