@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API_IP=$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ address: ipAddress }" | jq -r '.address')
-LOCAL_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+LOCAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 az postgres server create \
    --resource-group $RESOURCE_GROUP \
@@ -9,6 +9,7 @@ az postgres server create \
    --location $REGION \
    --admin-user $dbAdministratorLogin \
    --admin-password $dbAdministratorLoginPassword \
+   --storage-size 51200 \
    --performance-tier Basic \
    --compute-units 50 \
    --version 9.6
