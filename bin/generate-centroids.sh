@@ -15,4 +15,11 @@ node_modules/.bin/mapshaper $COUNTRY_SHP \
   -filter-islands min-vertices=2 remove-empty \
   -o format=geojson $TMP_DIR/country.geojson
 
-cat $TMP_DIR/country.geojson | bin/centroid | bin/zip-object > centroids.json
+echo ""
+echo "Reprojecting the geojson file"
+
+cat $TMP_DIR/country.geojson \
+  | node_modules/.bin/dirty-reproject --forward robinson \
+  > $TMP_DIR/robinson-country.geojson
+
+cat $TMP_DIR/robinson-country.geojson | bin/centroid | bin/zip-object > centroids.json
