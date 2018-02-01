@@ -9,14 +9,21 @@ process.stdin.pipe(geojsonStream.parse())
 .pipe(geojsonStream.stringify())
 .pipe(process.stdout)
 
+const countries_without_iso2 = [
+  'FRA',
+  'NOR'
+];
+
 function write (feature, _, next) {
   // some very small islands don't have an iso 2 code
-  if (feature.properties.ISO_A2 !== '-99') {
+  if (feature.properties.ISO_A2 !== '-99' || countries_without_iso2.indexOf(feature.properties.ADM0_A3) >= 0) {
+    const iso = feature.properties.ISO_A2 === '-99' ? feature.properties.ADM0_A3.slice(0, 2) : feature.properties.ISO_A2;
+
     const out = {
       geometry: { coordinates: extent(feature) },
       properties: {}
     }
-    out.properties.iso = feature.properties.ISO_A2
+    out.properties.iso = iso;
     this.push(out)
   }
   next()
