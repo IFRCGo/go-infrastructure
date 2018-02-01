@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const geojsonStream = require('geojson-stream')
+const through = require('through2')
+const extent = require('turf-extent')
+
+process.stdin.pipe(geojsonStream.parse())
+.pipe(through.obj(write))
+.pipe(geojsonStream.stringify())
+.pipe(process.stdout)
+
+function write (feature, _, next) {
+  // some very small islands don't have an iso 2 code
+  if (feature.properties.ISO_A2 !== '-99') {
+    const out = {
+      geometry: { coordinates: extent(feature) },
+      properties: {}
+    }
+    out.properties.iso = feature.properties.ISO_A2
+    this.push(out)
+  }
+  next()
+}
