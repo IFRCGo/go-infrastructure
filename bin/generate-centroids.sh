@@ -11,7 +11,6 @@ echo ""
 echo "Creating simplified geojson files"
 
 node_modules/.bin/mapshaper $COUNTRY_SHP \
-  -simplify visvalingam 50% \
   -filter-islands min-vertices=2 remove-empty \
   -o format=geojson $TMP_DIR/country.geojson
 
@@ -22,4 +21,5 @@ cat $TMP_DIR/country.geojson \
   | node_modules/.bin/dirty-reproject --forward robinson \
   > $TMP_DIR/robinson-country.geojson
 
+cat $TMP_DIR/robinson-country.geojson | bin/bounding-box | bin/zip-object > bounding-boxes.json
 cat $TMP_DIR/robinson-country.geojson | bin/centroid | bin/zip-object > centroids.json
