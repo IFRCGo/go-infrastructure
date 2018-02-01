@@ -67,7 +67,7 @@ az network nsg rule create \
 az network nsg rule create \
   --resource-group $RESOURCE_GROUP \
   --nsg-name $GO_NSG \
-  --name 'AllowHttp' \
+  --name 'AllowHttps' \
   --access allow \
   --protocol Tcp \
   --direction Inbound \
