@@ -42,6 +42,21 @@ az network vnet subnet create \
   --address-prefix "192.168.2.0/24"
 
 
+# open port 80 for HTTP traffic to API only
+az network nsg rule create \
+  --resource-group $RESOURCE_GROUP \
+  --nsg-name $GO_NSG \
+  --name 'AllowESHttp' \
+  --access allow \
+  --protocol Tcp \
+  --direction Inbound \
+  --priority 250 \
+  --source-address-prefix "Internet" \
+  --source-port-range "*" \
+  --destination-address-prefix "VirtualNetwork" \
+  --destination-port-range 9200
+
+
 az network nic create \
   --name $ES_NIC \
   --resource-group $RESOURCE_GROUP \
