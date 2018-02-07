@@ -3,6 +3,15 @@
 API_IP=$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ address: ipAddress }" | jq -r '.address')
 LOCAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
+if [ $PRODUCTION != 0 ]
+then
+  PERFORMANCE_TIER="Standard"
+  COMPUTE_UNITS="100"
+else
+  PERFORMANCE_TIER="Basic"
+  COMPUTE_UNITS="50"
+fi
+
 az postgres server create \
    --resource-group $RESOURCE_GROUP \
    --name $DB_SERVER_NAME  \
@@ -10,8 +19,8 @@ az postgres server create \
    --admin-user $dbAdministratorLogin \
    --admin-password $dbAdministratorLoginPassword \
    --storage-size 51200 \
-   --performance-tier Basic \
-   --compute-units 50 \
+   --performance-tier $PERFORMANCE_TIER \
+   --compute-units $COMPUTE_UNITS \
    --version 9.6
 
 az postgres server firewall-rule create \
