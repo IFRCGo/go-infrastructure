@@ -7,9 +7,11 @@ if [ $PRODUCTION != 0 ]
 then
   PERFORMANCE_TIER="Standard"
   COMPUTE_UNITS="100"
+  STORAGE_SIZE="128000"
 else
   PERFORMANCE_TIER="Basic"
   COMPUTE_UNITS="50"
+  STORAGE_SIZE="51200"
 fi
 
 az postgres server create \
@@ -18,7 +20,7 @@ az postgres server create \
    --location $REGION \
    --admin-user $dbAdministratorLogin \
    --admin-password $dbAdministratorLoginPassword \
-   --storage-size 51200 \
+   --storage-size $STORAGE_SIZE \
    --performance-tier $PERFORMANCE_TIER \
    --compute-units $COMPUTE_UNITS \
    --version 9.6
