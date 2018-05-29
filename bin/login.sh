@@ -38,7 +38,11 @@ export ES_NAME=$PREFIX"dsgoes"
 export ES_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
 
 # DB config
-export DB_SERVER_NAME=$PREFIX"dsgodb20171121"
+if [ $PRODUCTION == 1 ]; then
+  export DB_SERVER_NAME=$PREFIX"dsgodb20180517"
+else
+  export DB_SERVER_NAME=$PREFIX"dsgodb20171121"
+fi
 export DJANGO_DB_HOST="$DB_SERVER_NAME.postgres.database.azure.com"
 export DJANGO_DB_PORT="5432"
 export DJANGO_DB_NAME="postgres"

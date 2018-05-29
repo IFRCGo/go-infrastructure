@@ -5,11 +5,11 @@ LOCAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 if [ $PRODUCTION != 0 ]
 then
-  PERFORMANCE_TIER="Standard"
-  COMPUTE_UNITS="100"
+  STORAGE_SIZE="128000"
+  SKU_NAME="GP_Gen5_2"
 else
-  PERFORMANCE_TIER="Basic"
-  COMPUTE_UNITS="50"
+  STORAGE_SIZE="51200"
+  SKU_NAME="B_Gen5_1"
 fi
 
 az postgres server create \
@@ -18,9 +18,8 @@ az postgres server create \
    --location $REGION \
    --admin-user $dbAdministratorLogin \
    --admin-password $dbAdministratorLoginPassword \
-   --storage-size 51200 \
-   --performance-tier $PERFORMANCE_TIER \
-   --compute-units $COMPUTE_UNITS \
+   --storage-size $STORAGE_SIZE \
+   --sku-name $SKU_NAME \
    --version 9.6
 
 az postgres server firewall-rule create \
