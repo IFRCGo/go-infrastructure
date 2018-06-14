@@ -1,13 +1,16 @@
 #!/bin/bash
 
+CENTROIDS_DIR=.tmp/centroids
+rm -rf $CENTROIDS_DIR
+mkdir -p $CENTROIDS_DIR
+
 TMP_DIR=.tmp/tiles
 rm -rf $TMP_DIR
-
 mkdir -p $TMP_DIR
 
 COUNTRY_SHP=tiles/input/ne_10m_admin_0_countries_lakes/ne_10m_admin_0_countries_lakes.shp
 ADM0_SHP=tiles/input/ICRC_Admin1_WD_Internal/ICRC_Admin1_WD_Internal.shp
-SIMPLIFICATION=(5 10 50 100)
+SIMPLIFICATION=(5 10 50 90)
 MIN_ZOOMS=(1 4 6 8)
 MAX_ZOOMS=(3 5 7 12)
 
@@ -35,6 +38,12 @@ for PCT_SIMPLIFICATION in ${SIMPLIFICATION[@]}; do
 done
 
 echo ""
+echo "Creating centroid file"
+cat $TMP_DIR/50/country.geojson | ./bin/centroid > $CENTROIDS_DIR/country-centroids.geojson
+cat $TMP_DIR/50/adm1.geojson | ./bin/centroid > $CENTROIDS_DIR/adm1-centroids.geojson
+
+
+echo ""
 echo "Generating tiles"
 for i in ${!SIMPLIFICATION[@]}; do
   PCT_SIMPLIFICATION=${SIMPLIFICATION[$i]}
@@ -50,10 +59,12 @@ for i in ${!SIMPLIFICATION[@]}; do
   tippecanoe --projection EPSG:3857 \
     --named-layer=country:$SOURCE_DIR/country.geojson \
     --named-layer=adm1:$SOURCE_DIR/adm1.geojson \
+    --named-layer=country-centroids:$CENTROIDS_DIR/country-centroids.geojson \
+    --named-layer=adm1-centroids:$CENTROIDS_DIR/adm1-centroids.geojson \
     --read-parallel \
     --drop-rate=0 \
-    --maximum-zoom=$MAX_ZOOM \
-    --minimum-zoom=$MIN_ZOOM \
+    -z $MAX_ZOOM \
+    -Z $MIN_ZOOM \
     --output $OUTPUT_DIR/tiles.mbtiles
 done
 
