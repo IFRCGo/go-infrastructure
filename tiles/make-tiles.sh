@@ -5,12 +5,11 @@ rm -rf $TMP_DIR
 
 mkdir -p $TMP_DIR
 
-COUNTRY_SHP=tiles/input/natural-earth-shapefiles/ne_10m_admin_0_countries_lakes/ne_10m_admin_0_countries_lakes.shp
-POPULATION_SHP=tiles/input/natural-earth-shapefiles/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp
-POPULATION_THRESHOLDS=(5000000 500000 10000 1000)
+COUNTRY_SHP=tiles/input/ne_10m_admin_0_countries_lakes/ne_10m_admin_0_countries_lakes.shp
+ADM0_SHP=tiles/input/ICRC_Admin1_WD_Internal/ICRC_Admin1_WD_Internal.shp
 SIMPLIFICATION=(5 10 50 100)
 MIN_ZOOMS=(1 4 6 8)
-MAX_ZOOMS=(3 5 7 10)
+MAX_ZOOMS=(3 5 7 12)
 
 # Debugging with one simplification level
 # SIMPLIFICATION=(5)
@@ -25,39 +24,15 @@ for PCT_SIMPLIFICATION in ${SIMPLIFICATION[@]}; do
   node_modules/.bin/mapshaper $COUNTRY_SHP \
     -simplify visvalingam $PCT_SIMPLIFICATION% \
     -filter-islands min-vertices=2 remove-empty \
+    -filter-fields ISO_A2,ADM0_A3_IS,NAME,ADM0_A3 \
     -o format=geojson $DIR/country.geojson
 
-  node_modules/.bin/mapshaper $POPULATION_SHP \
-    -o format=geojson $DIR/population.geojson
+  node_modules/.bin/mapshaper $ADM0_SHP \
+    -simplify visvalingam $PCT_SIMPLIFICATION% \
+    -filter-islands min-vertices=2 remove-empty \
+    -filter-fields ISO2,Admin00Nam,Admin01Nam,OBJECTID,Admin01Cod \
+    -o format=geojson $DIR/adm1.geojson
 done
-
-
-echo ""
-echo "Filtering cities by population"
-for i in ${!SIMPLIFICATION[@]}; do
-  PCT_SIMPLIFICATION=${SIMPLIFICATION[$i]}
-  DIR=$TMP_DIR/$PCT_SIMPLIFICATION
-  POPULATION_THRESHOLD=${POPULATION_THRESHOLDS[$i]}
-  cat $DIR/population.geojson \
-    | ./bin/filter-by-population --threshold $POPULATION_THRESHOLD \
-    > $DIR/filtered-population.geojson
-done
-
-
-echo ""
-echo "Reprojecting"
-for PCT_SIMPLIFICATION in ${SIMPLIFICATION[@]}; do
-  DIR=$TMP_DIR/$PCT_SIMPLIFICATION
-
-  cat $DIR/country.geojson \
-    | node_modules/.bin/dirty-reproject --forward robinson \
-    > $DIR/robinson-country.geojson
-
-  cat $DIR/filtered-population.geojson \
-    | node_modules/.bin/dirty-reproject --forward robinson \
-    > $DIR/robinson-population.geojson
-done
-
 
 echo ""
 echo "Generating tiles"
@@ -72,21 +47,18 @@ for i in ${!SIMPLIFICATION[@]}; do
   echo $MIN_ZOOM
   echo $MAX_ZOOM
 
-  tippecanoe --projection EPSG:4326 \
-    --named-layer=country:$SOURCE_DIR/robinson-country.geojson \
-    --named-layer=population:$SOURCE_DIR/robinson-population.geojson \
+  tippecanoe --projection EPSG:3857 \
+    --named-layer=country:$SOURCE_DIR/country.geojson \
+    --named-layer=adm1:$SOURCE_DIR/adm1.geojson \
+    --read-parallel \
     --drop-rate=0 \
-    --output-to-directory=$OUTPUT_DIR \
-    --no-tile-compression \
     --maximum-zoom=$MAX_ZOOM \
-    --minimum-zoom=$MIN_ZOOM
+    --minimum-zoom=$MIN_ZOOM \
+    --output $OUTPUT_DIR/tiles.mbtiles
 done
 
-echo ""
-echo "Moving generated tiles to output"
-OUTPUT_DIR=tiles/output
-for PCT_SIMPLIFICATION in ${SIMPLIFICATION[@]}; do
-  SOURCE_DIR=$TMP_DIR/output/$PCT_SIMPLIFICATION
-  mv $SOURCE_DIR/metadata.json $SOURCE_DIR/metadata-$PCT_SIMPLIFICATION.json
-  cp -a $SOURCE_DIR/* $OUTPUT_DIR
-done
+tile-join -f -o $TMP_DIR/output/combined-go-tiles.mbtiles \
+  $TMP_DIR/output/${SIMPLIFICATION[0]}/tiles.mbtiles \
+  $TMP_DIR/output/${SIMPLIFICATION[1]}/tiles.mbtiles \
+  $TMP_DIR/output/${SIMPLIFICATION[2]}/tiles.mbtiles \
+  $TMP_DIR/output/${SIMPLIFICATION[3]}/tiles.mbtiles
