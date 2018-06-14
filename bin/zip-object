@@ -9,6 +9,6 @@ process.stdin.pipe(geojsonStream.parse())
 .on('finish', () => console.log(obj))
 
 function write (feature, _, next) {
-  obj[feature.properties.iso] = feature.geometry.coordinates
+  obj[feature.properties.id] = feature.geometry.coordinates
   next()
 }
