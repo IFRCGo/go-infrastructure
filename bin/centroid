@@ -15,13 +15,24 @@ const countries_without_iso2 = [
 ];
 
 function write (feature, _, next) {
-  // some very small islands don't have an iso 2 code
-  if (feature.properties.ISO_A2 !== '-99' || countries_without_iso2.indexOf(feature.properties.ADM0_A3) >= 0) {
-    const iso = feature.properties.ISO_A2 === '-99' ? feature.properties.ADM0_A3.slice(0, 2) : feature.properties.ISO_A2;
-
-    const out = centroid(feature)
-    out.properties.iso = iso;
-    this.push(out)
+  const out = centroid(feature);
+  let id;
+  if (feature.properties.hasOwnProperty('Admin01Nam')) {
+    // sub-country admin regions
+    id = feature.properties.OBJECTID;
+  } else if (feature.properties.ISO_A2 !== '-99') {
+    // countries with valid ISO2 code
+    id = feature.properties.ISO_A2;
+  } else if (countries_without_iso2.indexOf(feature.properties.ADM0_A3) >= 0) {
+    // Norway and France, which somehow don't have ISO 2 codes in our data
+    id = feature.properties.ADM0_A3.slice(0, 2);
+  } else {
+    // Small island countries without ISO 2 codes
+    id = feature.properties.ADM0_A3;
   }
+  out.properties.id = id;
+  out.properties.name = feature.properties.NAME || feature.properties.Admin01Nam
+  out.properties.country = feature.properties.Admin00Nam || 0
+  this.push(out)
   next()
 }
