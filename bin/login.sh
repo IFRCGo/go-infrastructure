@@ -39,7 +39,7 @@ export ES_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
 
 # DB config
 if [ $PRODUCTION == 1 ]; then
-  export DB_SERVER_NAME=$PREFIX"dsgodb20180517"
+  export DB_SERVER_NAME=$PREFIX"dsgodb20180919"
 else
   export DB_SERVER_NAME=$PREFIX"dsgodb20171121"
 fi
