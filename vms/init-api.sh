@@ -56,7 +56,7 @@ scp -i .tmp/key .tmp/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
   docker stop \$(docker ps -q)
   docker rm \$(docker ps -a -q)
-  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem -p 80:80 -p 443:443 --env-file .env -t -d ${API_DOCKER_IMAGE}
+  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem -p 80:80 -p 443:443 --env-file .env --entrypoint /usr/local/bin/runserver.sh -t -d ${API_DOCKER_IMAGE}
 EOF
 
 rm .tmp/env
