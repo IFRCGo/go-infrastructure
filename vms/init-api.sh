@@ -11,6 +11,18 @@ az storage blob download \
   --name api \
   --file .tmp/key
 
+mkdir -p .tmp
+az storage blob download \
+  --container-name $KEY_CONTAINER \
+  --name "ifrcgoapi.crt" \
+  --file .tmp/ifrcgoapi.crt
+
+mkdir -p .tmp
+az storage blob download \
+  --container-name $KEY_CONTAINER \
+  --name "ifrcgoapi.key" \
+  --file .tmp/ifrcgoapi.key
+
 chmod 600 .tmp/key
 
 IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $API_NAME --query [0].virtualMachine.network.publicIpAddresses[0].ipAddress -o tsv)"
@@ -39,8 +51,8 @@ echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
 #echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
-scp -i .tmp/key certificates/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
-scp -i .tmp/key certificates/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
+scp -i .tmp/key .tmp/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
+scp -i .tmp/key .tmp/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
   docker stop \$(docker ps -q)
   docker rm \$(docker ps -a -q)
@@ -49,3 +61,5 @@ EOF
 
 rm .tmp/env
 rm .tmp/key
+rm .tmp/ifrcgoapi.crt
+rm .tmp/ifrcgoapi.key
