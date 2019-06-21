@@ -48,6 +48,11 @@ echo "AZURE_STORAGE_ACCOUNT=$STORAGE_NAME" >> .tmp/env
 echo "AZURE_STORAGE_KEY=$STORAGE_KEY" >> .tmp/env
 echo "API_FQDN=$CDN_HOSTNAME" >> .tmp/env
 echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
+
+# TEST emails and other useful stuff
+echo "TEST_EMAILS=$TEST_EMAILS" >> .tmp/env
+echo "PRODUCTION=$PRODUCTION" >> .tmp/env
+
 #echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
