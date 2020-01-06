@@ -54,6 +54,9 @@ export DJANGO_DB_PASS="$dbAdministratorLoginPassword"
 export TEST_EMAILS="$TEST_EMAILS"
 export PRODUCTION=$PRODUCTION
 
+# Databank
+export FDRS_CREDENTIAL="$FDRS_CREDENTIAL"
+
 # Azure file storage connection
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 export AZURE_STORAGE_CONNECTION_STRING=$CONNECTION
