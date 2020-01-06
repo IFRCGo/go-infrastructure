@@ -52,6 +52,7 @@ echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
 # TEST emails and other useful stuff
 echo "TEST_EMAILS=$TEST_EMAILS" >> .tmp/env
 echo "PRODUCTION=$PRODUCTION" >> .tmp/env
+echo "FDRS_CREDENTIAL=$FDRS_CREDENTIAL" >> .tmp/env
 
 #echo "BULK_IMPORT=1" >> .tmp/env
 
