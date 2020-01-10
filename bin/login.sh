@@ -1,6 +1,6 @@
 #!/bin/bash
 
-az login --username $AZURE_USER --password $AZURE_PASS
+az login --username $AZURE_USER --password $AZURE_PASS --allow-no-subscriptions
 
 # Resource group and region
 export REGION="northeurope"
