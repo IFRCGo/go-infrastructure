@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-$f1='/home/some_path_under_go_root/go-api/CHANGELOG.md';
-$f2='/home/some_path_under_go_root/CHANGELOG2.md';
+// check these at the bottom as well
+$f1='/home/zol/w/ifrc/go-api/CHANGELOG.md';
+$f2='/home/zol/w/ifrc/CHANGELOG2.md';
 $pre='1.1.';
 fclose(STDOUT); $STDOUT = fopen($f2, 'w');
 
@@ -37,16 +38,16 @@ foreach($f_ as $i=>$f){
 
 rename($f2, $f1);
 
-$f1='/home/some_path_under_go_root/go-api/main/__init__.py';
-$f2='/home/some_path_under_go_root/__init__.py2';
+$f1='/home/zol/w/ifrc/go-api/main/__init__.py';
+$f2='/home/zol/w/ifrc/__init__.py2';
 fclose($STDOUT); $STDOUT = fopen($f2, 'w');
 $f_=file($f1,FILE_IGNORE_NEW_LINES);
 
 foreach($f_ as $i=>$f){
-    if (strpos($f, 'version') !== false) {
+    if (strstr($f, 'version') !== false) {
         $x=explode(d,str_replace(a,d,$f));
         print $x[0].a.$x[1].d.$x[2].d.$v.a.n;
-    }
+    } else print($f.n);
 }
 
 rename($f2, $f1);
