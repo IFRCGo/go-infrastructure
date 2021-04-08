@@ -12,7 +12,7 @@
     "dirty-reprojectors": "^0.0.1",
     "geojson-stream": "^0.0.1",
     "mapshaper": "^0.4.58",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "stream-collect": "^2.1.0",
     "through2": "^2.0.3",
     "turf-extent": "^1.0.4"
