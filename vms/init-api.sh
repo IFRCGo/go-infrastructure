@@ -44,15 +44,25 @@ echo "EMAIL_HOST=$EMAIL_HOST" >> .tmp/env
 echo "EMAIL_PORT=$EMAIL_PORT" >> .tmp/env
 echo "EMAIL_USER=$EMAIL_USER" >> .tmp/env
 echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
+echo "EMAIL_API_ENDPOINT=$EMAIL_API_ENDPOINT" >> .tmp/env
 echo "AZURE_STORAGE_ACCOUNT=$STORAGE_NAME" >> .tmp/env
 echo "AZURE_STORAGE_KEY=$STORAGE_KEY" >> .tmp/env
 echo "API_FQDN=$CDN_HOSTNAME" >> .tmp/env
 echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
+echo "IS_WORKER=$IS_WORKER" >> .tmp/env
+echo "CELERY_REDIS_URL=$CELERY_REDIS_URL" >> .tmp/env
+echo "MOLNIX_API_BASE=$MOLNIX_API_BASE" >> .tmp/env
+echo "MOLNIX_USERNAME=$MOLNIX_USERNAME" >> .tmp/env
+echo "MOLNIX_PASSWORD=$MOLNIX_PASSWORD" >> .tmp/env
+echo "MAPBOX_ACCESS_TOKEN=$MAPBOX_ACCESS_TOKEN" >> .tmp/env
+echo "APPLICATION_INSIGHTS_INSTRUMENTATION_KEY=$APPLICATION_INSIGHTS_INSTRUMENTATION_KEY" >> .tmp/env
+echo "ERP_API_ENDPOINT=$ERP_API_ENDPOINT" >> .tmp/env
 
 # TEST emails and other useful stuff
 echo "TEST_EMAILS=$TEST_EMAILS" >> .tmp/env
 echo "PRODUCTION=$PRODUCTION" >> .tmp/env
 echo "FDRS_CREDENTIAL=$FDRS_CREDENTIAL" >> .tmp/env
+echo "FDRS_APIKEY=$FDRS_APIKEY" >> .tmp/env
 
 #echo "BULK_IMPORT=1" >> .tmp/env
 
@@ -60,9 +70,10 @@ scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
 scp -i .tmp/key .tmp/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
 scp -i .tmp/key .tmp/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
+  docker pull ${API_DOCKER_IMAGE}
   docker stop \$(docker ps -q)
   docker rm \$(docker ps -a -q)
-  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem -p 80:80 -p 443:443 --env-file .env --entrypoint /usr/local/bin/runserver.sh -t -d ${API_DOCKER_IMAGE}
+  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem -v \$(pwd)/go-logs:/home/ifrc/logs -p 80:80 -p 443:443 --env-file .env --entrypoint /usr/local/bin/runserver.sh -t -d ${API_DOCKER_IMAGE}
 EOF
 
 rm .tmp/env
