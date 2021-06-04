@@ -1,10 +1,10 @@
-#version: 2
-#jobs:
-#  build:
-#    docker:
-#      - image: developmentseed/circleci:node8.9-azure-cli
-#
-#    steps:
+version: 2
+jobs:
+  build:
+    docker:
+      - image: developmentseed/circleci:node8.9-azure-cli
+
+    steps:
 #      - checkout
 #
 #      - restore_cache:
@@ -20,11 +20,11 @@
 #          paths:
 #            - node_modules
 #
-#      - run:
-#          name: Deploy
-#          command: |
-#              if [ "${CIRCLE_BRANCH}" == "master" ]; then
-#                echo "No deployment yet"
-#              else
-#                echo "Skipping deployment"
-#              fi
+      - run:
+          name: Deploy
+          command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                echo "No deployment yet"
+              else
+                echo "Skipping deployment"
+              fi
