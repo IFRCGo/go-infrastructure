@@ -181,7 +181,7 @@ mapshaper@^0.4.58:
     d3-dsv "~1.0.3"
     iconv-lite "0.4.19"
     mproj "0.0.15"
-    open "~0.0.3"
+    open "~8.0.2"
     optimist "~0.6.0"
     rbush "~2.0.1"
     rw "~1.3.2"
@@ -189,10 +189,6 @@ mapshaper@^0.4.58:
 minimist@^1.2.0, minimist@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.3.tgz#3db5c0765545ab8637be71f333a104a965a9ca3f"
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 mproj@0.0.15:
   version "0.0.15"
@@ -209,15 +205,15 @@ object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
-open@~0.0.3:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/open/-/open-0.0.5.tgz#42c3e18ec95466b6bf0dc42f3a2945c3f0cad8fc"
+open@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/open/-/open-8.0.2.tgz#8c3e95cce93ba2fc8d99968ee8bfefecdb50b84f"
 
 optimist@~0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   dependencies:
-    minimist "~0.0.1"
+    minimist "~1.2.0"
     wordwrap "~0.0.2"
 
 os-homedir@^1.0.1:
