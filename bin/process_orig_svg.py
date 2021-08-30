@@ -7,7 +7,7 @@ text    = ''
 for index,line in enumerate(finp):
     x = line.strip().split(" ")
     if x[0]=='<rect':
-        x[0]+= ' id=' + str(i) + ' className="svgPointerEvent" opacity="0.8"'
+        x[0]+= ' id="' + str(i) + '" className="svgPointerEvent"'
         i += 1
         text += ' '.join(x) + "\n"
     else:
