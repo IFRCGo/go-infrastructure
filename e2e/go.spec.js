@@ -19,7 +19,20 @@ context('Actions', () => {
     cy.contains(':nth-child(2) > .styles_title__1rd77', 'Programme Type')
     cy.get(':nth-child(3) > [href="/about"] > span').click()
     cy.contains('.about__resources__block > .container-lg > div.text-center > .line-brand-deco-border-top-wrap > .fold__title > span', 'IFRC Resources')
+    cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret > span').click() // Regions
+    cy.get(':nth-child(4) > .drop__menu-item').click() // Europe
+    cy.get('.link--with-icon-text').click() // All countries
+    cy.get(':nth-child(1) > .region-countries__link > .region-countries__linkC').click() // First one
+    //cy.get('a[href="/foo"]').should('have.attr', 'target', '_blank')
+    cy.get(':nth-child(1) > .pill__brand').then(($el)=>{
+      //$el.get(0).click();
+      //console.log("this is it!")
+      //debugger
+      //console.log($el[0].href)
+      expect($el[0].href).to.be.eq("https://www.ifrc.org/national-societies-directory/albanian-red-cross")
+    })
 
+    
   })
 
   it('logs in via UI', () => {
