@@ -38,8 +38,7 @@ context('Actions', () => {
     cy.get('#login-password').type(password)
     cy.get('.form__footer > .button > span').click()
 
-//    cy.contains('.page__meta-nav > .drop__toggle > span', 'test user')
-    cy.contains('.page__meta-nav > .drop__toggle > span', 'Levente Otta')
+    cy.contains('.page__meta-nav > .drop__toggle > span', 'test user')
     cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret > span').click()
     cy.get(':nth-child(4) > .drop__menu-item').click()
     cy.contains('.inpage__title', 'Europe')
