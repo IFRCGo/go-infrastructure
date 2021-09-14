@@ -1,0 +1,2 @@
+export CYPRESS_secret=OnlyForYou  # EDIT THIS | password
+~/src/cypress/Cypress/Cypress     # EDIT THIS | the starter Cypress
