@@ -24,7 +24,7 @@ import './commands'
  * Make sure "cypress.json" + CYPRESS_ environment variables
  * have username and password values set.
  */
-export const login1 = () => {
+export const login = () => {
   const username = Cypress.env('some')
   const password = Cypress.env('secret')
 
@@ -32,7 +32,7 @@ export const login1 = () => {
   expect(username, 'username was set').to.be.a('string').and.not.be.empty
   // but the password value should not be shown
   if (typeof password !== 'string' || !password) {
-    throw new Error('Missing password value, set using CYPRESS_password=...')
+    throw new Error('Missing password value, set using CYPRESS_secret=...')
   }
 
   cy.request({
@@ -43,9 +43,15 @@ export const login1 = () => {
       username,
       password
     }
+  }).as('getauthtoken')
+  cy.get('@getauthtoken').should((response) => {
+    console.log(response.body.token) // todo: how to save in variable and use later?
+    // cy.getCookie('sessionid').should('exist')
   })
+  cy.visit('http://localhost:3000/')
 }
-export const login = () => {
+
+export const loginUI = () => {
   const username = Cypress.env('some')
   const password = Cypress.env('secret')
 
@@ -53,7 +59,7 @@ export const login = () => {
   expect(username, 'username was set').to.be.a('string').and.not.be.empty
   // but the password value should not be shown
   if (typeof password !== 'string' || !password) {
-    throw new Error('Missing password value, set using CYPRESS_password=...')
+    throw new Error('Missing password value, set using CYPRESS_secret=...')
   }
 
   cy.visit('http://localhost:3000/login')
