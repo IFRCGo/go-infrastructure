@@ -1,4 +1,4 @@
-rm -f urls
-wget 'https://prddsgocdnapi.azureedge.net/api/v2/nslinks?limit=200' -O urls
-perl -pi -w -e 's/\}/\n/g'                               urls
-perl -pi -w -e 's/^.*url_ifrc...//;s/^.\n//;s/"//'       urls
+rm -f nslinks
+wget 'https://prddsgocdnapi.azureedge.net/api/v2/nslinks?limit=200' -O nslinks
+perl -pi -w -e 's/\}/\n/g'                               nslinks
+perl -pi -w -e 's/^.*url_ifrc...//;s/^.\n//;s/"//'       nslinks
