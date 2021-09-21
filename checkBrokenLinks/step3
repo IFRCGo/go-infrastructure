@@ -1,5 +1,5 @@
 #!/bin/bash
 rm -f out/*
-ls | sort > ../out/all
 cd in
+ls | sort > ../out/all
 grep -l 'h2 class="page-hero' * | sort > ../out/ok
