@@ -1,3 +1,3 @@
 cd in
-cat ../urls|xargs -iQ wget Q
+cat ../nslinks|xargs -iQ wget Q
 #wget https://www.ifrc.org/national-societies-directory/bangladesh-red-crescent-society
