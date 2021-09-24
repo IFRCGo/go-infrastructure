@@ -1,0 +1,17 @@
+We could check the About page links also; a pre-version for this is here. Any advice is welcome:
+
+==> step1 <==
+curl -s https://github.com/IFRCGo/go-frontend/blob/develop/src/root/views/about.js|perl -p -w -e 's/"/\n/g'|perl -p -w -e "s/'/\n/g;s/&quot;/\n/g;s/&#39;/\n/g"|grep http|grep -v .js$|grep -v .css$|grep -v http-equiv|grep -v github|grep -v sharepoint|grep -v w3.org \
+| cat -n - |perl -p  -w -e 's/^ +//;s/\t+/\|/' \
+> aboutlinks
+
+==> step2 <==
+cd results
+rm -f *
+cat ../aboutlinks|xargs -iQ sh -c "../processme 'Q'"
+
+
+==> processme <==
+a=$(echo "$1"|cut -d'|' -f1)
+b=$(echo "$1"|cut -d'|' -f2)
+curl -s $b > $a &
