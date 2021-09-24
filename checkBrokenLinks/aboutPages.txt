@@ -15,3 +15,9 @@ cat ../aboutlinks|xargs -iQ sh -c "../processme 'Q'"
 a=$(echo "$1"|cut -d'|' -f1)
 b=$(echo "$1"|cut -d'|' -f2)
 curl -s $b > $a &
+
+==> aboutlinks <==
+1|https://opensource.guide
+2|https://schema.org/SoftwareSourceCode
+3|https://www.youtube.com/embed/dwPsQzla9A4
+...
