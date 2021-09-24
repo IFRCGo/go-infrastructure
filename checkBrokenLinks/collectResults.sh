@@ -7,6 +7,6 @@ perl -pi -w -e 's/^.*url_ifrc...//;s/^.\n//;s/"//'                     nslinks
 
 cd results
 rm -f *
-cat ../nslinks|xargs -iQ sh -c "curl -s Q|grep 'h2 class=.page-hero' > \$(echo Q|sed 's/^.*\///')"
+cat ../nslinks|xargs -iQ sh -c "curl -s Q|grep 'h2 class=.page-hero' > \$(echo Q|sed 's/^.*\///') &; sleep 1"
 
 # Example: https://www.ifrc.org/national-societies-directory/bangladesh-red-crescent-society
