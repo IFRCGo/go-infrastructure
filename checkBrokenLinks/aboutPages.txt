@@ -1,9 +1,12 @@
 We could check the About page links also; a pre-version for this is here. Any advice is welcome:
 
 ==> step1 <==
-curl -s https://github.com/IFRCGo/go-frontend/blob/develop/src/root/views/about.js|perl -p -w -e 's/"/\n/g'|perl -p -w -e "s/'/\n/g;s/&quot;/\n/g;s/&#39;/\n/g"|grep http|grep -v .js$|grep -v .css$|grep -v http-equiv|grep -v github|grep -v sharepoint|grep -v w3.org \
+curl -s https://github.com/IFRCGo/go-frontend/blob/develop/src/root/views/about.js \
+|perl -p -w -e 's/"/\n/g'|perl -p -w -e "s/'/\n/g;s/&quot;/\n/g;s/&#39;/\n/g"|grep http \
+| grep -v SoftwareSourceCode |grep -v .js$|grep -v .css$|grep -v http-equiv|grep -v github|grep -v sharepoint|grep -v w3.org \
 | cat -n - |perl -p  -w -e 's/^ +//;s/\t+/\|/' \
 > aboutlinks
+
 
 ==> step2 <==
 cd results
@@ -18,6 +21,6 @@ curl -s $b > $a &
 
 ==> aboutlinks <==
 1|https://opensource.guide
-2|https://schema.org/SoftwareSourceCode
-3|https://www.youtube.com/embed/dwPsQzla9A4
+2|https://www.youtube.com/embed/dwPsQzla9A4
+3|https://drive.google.com/file/d/1FnmBm_8K52eTKWa8xWK52eebhgOz60SO/view
 ...
