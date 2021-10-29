@@ -40,7 +40,7 @@ export ES_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
 # DB config
 if [ $PRODUCTION == 1 ]; then
   # If you change this, do not forget to set the firewall rules for the new db:
-  export DB_SERVER_NAME=$PREFIX"dsgodb20190208"
+  export DB_SERVER_NAME=$PREFIX"dsgodb20211030" # Obsolete psql9.6:dsgodb20190208
 else
   export DB_SERVER_NAME=$PREFIX"dsgodb20211022" # Obsolete psql9.6:dsgodb20171121
 fi
