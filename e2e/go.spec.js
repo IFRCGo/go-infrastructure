@@ -12,6 +12,11 @@ context('Actions', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('sessionid, csrftoken, UILanguage')
   })
+  // resizeobserver loop limit exceeded (can be Chrome related)
+  // https://stackoverflow.com/questions/53845493/cypress-uncaught-assertion-error-despite-cy-onuncaughtexception
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
 
   it('checks a 3W endpoint', () => {
     cy.visit('http://localhost:3000/three-w')
