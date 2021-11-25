@@ -17,6 +17,7 @@ ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
   docker stop \$(docker ps -q)
   docker rm \$(docker ps -a -q)
   docker run -d -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.0
+# if you upgrade elasticsearch-oss version, a manage.py index_elasticsearch is also needed, and keep synched with go-api requirements.txt
 EOF
 
 rm .tmp/key
