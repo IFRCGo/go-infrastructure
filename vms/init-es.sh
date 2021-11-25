@@ -16,7 +16,7 @@ IP="$(az vm list-ip-addresses --resource-group $RESOURCE_GROUP --name $ES_NAME -
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
   docker stop \$(docker ps -q)
   docker rm \$(docker ps -a -q)
-  docker run -d -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.0
+  docker run -d -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.0
 EOF
 
 rm .tmp/key
