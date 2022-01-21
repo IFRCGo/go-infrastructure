@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
+// Works only on linux
 fclose(STDOUT); $STDOUT = fopen('proddump.sql', 'w');
-$f_=file('/tmp/2/proddump20220120.sql',FILE_IGNORE_NEW_LINES);
+$f_=file('proddumpINPUT.sql',FILE_IGNORE_NEW_LINES);
 
 define('d',"\t");
 define('n',"\n");
@@ -21,10 +22,10 @@ foreach($f_ as $i=>$f){
         $x=explode(d,$f);
 	if (
            (sizeof($x)>7) &&
-           ($x[7] != 'zoltan.szabo@ifrc.org') &&
-           ($x[7] != 'szabozoltan969@gmail.com')
+           ($x[7] != 'an_email_addr_to_keep_locally@...') &&
+           ($x[7] != 'another_email_address_to_keep@...')
            )
-            {$x[1]='-'; $x[7]='none@f.your.bu';}
+            {$x[1]='-'; $x[7]='none@of.your.business';}
         print implode(d,$x).n;}
     else print $f.n;
 }
