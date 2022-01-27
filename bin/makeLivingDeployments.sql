@@ -28,3 +28,7 @@ from tmpnsa d where notifications_surgealert.id = d.id;
 update deployments_deployedperson
 set end_date=d.end_date
 from tmpdpd d where deployments_deployedperson.id = d.id;
+
+drop table tmpdpd;
+drop table tmpnsa;
+drop table tmpdd;
