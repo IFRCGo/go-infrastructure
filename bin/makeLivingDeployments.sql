@@ -10,10 +10,10 @@ select id, created_at, "end", closes,is_active from notifications_surgealert;
 select * from deployments_deployedperson;
 
 --Main date updates
-update deployments_personneldeployment set created_at = current_date + interval '9 days' where created_at is not null;
+update deployments_personneldeployment set created_at = current_date                     where created_at is not null;
 update deployments_personneldeployment set end_date   = current_date + interval '9 days' where end_date is not null;
 update notifications_surgealert        set "end"      = current_date + interval '9 days' where "end" is not null;
-update notifications_surgealert        set created_at = current_date + interval '9 days' where created_at is not null;
+update notifications_surgealert        set created_at = current_date                     where created_at is not null;
 update deployments_deployedperson      set end_date   = current_date + interval '9 days' where end_date is not null;
 
 --Restore, if needed:
