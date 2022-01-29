@@ -61,6 +61,7 @@ echo "ERP_API_SUBSCRIPTION_KEY=$ERP_API_SUBSCRIPTION_KEY" >> .tmp/env
 
 # TEST emails and other useful stuff
 echo "TEST_EMAILS=$TEST_EMAILS" >> .tmp/env
+echo "DEBUG_EMAIL=$DEBUG_EMAIL" >> .tmp/env
 echo "PRODUCTION=$PRODUCTION" >> .tmp/env
 echo "FDRS_CREDENTIAL=$FDRS_CREDENTIAL" >> .tmp/env
 echo "FDRS_APIKEY=$FDRS_APIKEY" >> .tmp/env
