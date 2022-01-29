@@ -1,6 +1,6 @@
 #!/bin/bash
 
-az login --username $AZURE_USER --password $AZURE_PASS --allow-no-subscriptions
+az login --username $AZURE_USER --password $AZURE_PASS
 
 # Resource group and region
 export REGION="northeurope"
@@ -49,13 +49,6 @@ export DJANGO_DB_PORT="5432"
 export DJANGO_DB_NAME="postgres"
 export DJANGO_DB_USER="$dbAdministratorLogin@$DB_SERVER_NAME"
 export DJANGO_DB_PASS="$dbAdministratorLoginPassword"
-
-# TEST emails and other useful stuff
-export TEST_EMAILS="$TEST_EMAILS"
-export PRODUCTION=$PRODUCTION
-
-# Databank
-export FDRS_CREDENTIAL="$FDRS_CREDENTIAL"
 
 # Azure file storage connection
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
