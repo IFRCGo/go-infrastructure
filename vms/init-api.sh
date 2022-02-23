@@ -33,6 +33,8 @@ echo "DJANGO_DB_PORT=$DJANGO_DB_PORT" >> .tmp/env
 echo "DJANGO_DB_NAME=$DJANGO_DB_NAME" >> .tmp/env
 echo "DJANGO_DB_USER=$DJANGO_DB_USER" >> .tmp/env
 echo "DJANGO_DB_PASS=$DJANGO_DB_PASS" >> .tmp/env
+echo "DJANGO_ADDITIONAL_ALLOWED_HOSTS==$DJANGO_ADDITIONAL_ALLOWED_HOSTS=" >> .tmp/env
+echo "GO_ENVIRONMENT=$GO_ENVIRONMENT" >> .tmp/env
 echo "GO_FTPHOST=$GO_FTPHOST" >> .tmp/env
 echo "GO_FTPUSER=$GO_FTPUSER" >> .tmp/env
 echo "GO_FTPPASS=$GO_FTPPASS" >> .tmp/env
