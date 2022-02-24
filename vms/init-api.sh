@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
-CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
+#ADMIN_URL instead of this: CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
 FQDN="$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ fqdn: dnsSettings.fqdn }" | jq -r '.fqdn')"
 STORAGE_KEY="$(az storage account keys list --account-name $STORAGE_NAME --resource-group $RESOURCE_GROUP | jq -r '.[0].value')"
 
@@ -41,7 +41,7 @@ echo "GO_FTPPASS=$GO_FTPPASS" >> .tmp/env
 echo "GO_DBPASS=$GO_DBPASS" >> .tmp/env
 echo "APPEALS_USER=$APPEALS_USER" >> .tmp/env
 echo "APPEALS_PASS=$APPEALS_PASS" >> .tmp/env
-echo "ES_HOST=$ES_HOST" >> .tmp/env
+echo "ELASTIC_SEARCH_HOST=$ELASTIC_SEARCH_HOST" >> .tmp/env
 echo "EMAIL_HOST=$EMAIL_HOST" >> .tmp/env
 echo "EMAIL_PORT=$EMAIL_PORT" >> .tmp/env
 echo "EMAIL_USER=$EMAIL_USER" >> .tmp/env
@@ -49,7 +49,7 @@ echo "EMAIL_PASS=$EMAIL_PASS" >> .tmp/env
 echo "EMAIL_API_ENDPOINT=$EMAIL_API_ENDPOINT" >> .tmp/env
 echo "AZURE_STORAGE_ACCOUNT=$STORAGE_NAME" >> .tmp/env
 echo "AZURE_STORAGE_KEY=$STORAGE_KEY" >> .tmp/env
-echo "API_FQDN=$CDN_HOSTNAME" >> .tmp/env
+echo "API_FQDN=$ADMIN_URL" >> .tmp/env
 echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
 echo "IS_WORKER=$IS_WORKER" >> .tmp/env
 echo "CELERY_REDIS_URL=$CELERY_REDIS_URL" >> .tmp/env
