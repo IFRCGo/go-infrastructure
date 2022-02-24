@@ -35,20 +35,18 @@ export ES_SUBNET=$PREFIX"dsgoelasticsubnet"
 export ES_NIC=$PREFIX"dsgoesPublicVMNIC"
 export ES_NAME=$PREFIX"dsgoes"
 
-export ES_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
+export ELASTIC_SEARCH_HOST=$ES_NAME".northeurope.cloudapp.azure.com:9200"
 
-# DB config
-if [ $PRODUCTION == 1 ]; then
-  # If you change this, do not forget to set the firewall rules for the new db:
-  export DB_SERVER_NAME=$PREFIX"dsgodb20211030" # Obsolete psql9.6:dsgodb20190208
-else
-  export DB_SERVER_NAME=$PREFIX"dsgodb20211022" # Obsolete psql9.6:dsgodb20171121
-fi
+# Remote database
+export DB_SERVER_NAME="$DB_SERVER_NAME"  # we need it in 2 places!
 export DJANGO_DB_HOST="$DB_SERVER_NAME.postgres.database.azure.com"
 export DJANGO_DB_PORT="5432"
 export DJANGO_DB_NAME="postgres"
 export DJANGO_DB_USER="$dbAdministratorLogin@$DB_SERVER_NAME"
 export DJANGO_DB_PASS="$dbAdministratorLoginPassword"
+
+# Databank
+export FDRS_CREDENTIAL="$FDRS_CREDENTIAL"
 
 # Azure file storage connection
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
