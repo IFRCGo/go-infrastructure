@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
-#ADMIN_URL instead of this: CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
+# ADMIN_URL instead of this: CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
 FQDN="$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ fqdn: dnsSettings.fqdn }" | jq -r '.fqdn')"
 STORAGE_KEY="$(az storage account keys list --account-name $STORAGE_NAME --resource-group $RESOURCE_GROUP | jq -r '.[0].value')"
 
