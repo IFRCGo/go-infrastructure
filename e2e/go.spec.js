@@ -18,6 +18,11 @@ context('Actions', () => {
     return false;
   });
 
+  it('checks recover-account', () => {
+    cy.visit('http://localhost:3000/recover-account')
+    cy.contains('.inpage__title', 'Recover Account')
+  })
+  
   it('checks a 3W endpoint', () => {
     cy.visit('http://localhost:3000/three-w')
     cy.contains('.styles_heading__2SPPb', 'Global 3W Response')
