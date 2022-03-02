@@ -6,6 +6,7 @@ The GO-related files and the Cypress core infrastructure are in two distinct dir
 So it is possible to upgrade Cypress core without touching the GO-related files.
 Recently we use cypress 9.5.1.
 
+First start: unzip cypress.zip, then run: Cypress/Cypress
 The index.js file should be in "cypress/support" directory,
 go.spec.js in "cypress/integration/3-own",
 and cypress.json in the root ("cypress").
