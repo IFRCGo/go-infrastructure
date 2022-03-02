@@ -4,7 +4,7 @@ The direct download (https://download.cypress.io/desktop) is the simplest way re
 
 The GO-related files and the Cypress core infrastructure are in two distinct directories.
 So it is possible to upgrade Cypress core without touching the GO-related files.
-Recently we use cypress 8.4.0
+Recently we use cypress 9.5.1.
 
 The index.js file should be in "cypress/support" directory,
 go.spec.js in "cypress/integration/3-own",
