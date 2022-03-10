@@ -14,7 +14,7 @@ az storage blob download \
 mkdir -p .tmp
 az storage blob download \
   --container-name $KEY_CONTAINER \
-  --name "ifrcgoapi.crt" \
+  --name "ifrcgoapi2022.crt" \
   --file .tmp/ifrcgoapi.crt
 
 mkdir -p .tmp
