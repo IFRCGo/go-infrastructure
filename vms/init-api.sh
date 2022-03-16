@@ -5,6 +5,7 @@ CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --r
 FQDN="$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ fqdn: dnsSettings.fqdn }" | jq -r '.fqdn')"
 STORAGE_KEY="$(az storage account keys list --account-name $STORAGE_NAME --resource-group $RESOURCE_GROUP | jq -r '.[0].value')"
 
+# Take care, staging and prod blob storage differs! If you use the same script, use same names everywhere!
 mkdir -p .tmp
 az storage blob download \
   --container-name $KEY_CONTAINER \
