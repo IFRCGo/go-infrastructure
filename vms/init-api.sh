@@ -1,8 +1,15 @@
 #!/bin/bash
 
-
-BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-REPO_DIR=$(dirname "$BASE_DIR")
+if [ -z ${REPO_DIR+x} ]; then
+  BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  REPO_DIR=$(dirname "$BASE_DIR")
+fi
+FILE=$REPO_DIR/docker-compose-prod.yml
+if [ -f "$FILE" ]; then
+  echo -e "The location of the remotely used docker-compose-prod.yml is:\n"$(ls $FILE)
+else
+  echo "$FILE does not exist. (CTRL+C to finish)"; read a; exit 1
+fi
 
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 # ADMIN_URL instead of this: CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
