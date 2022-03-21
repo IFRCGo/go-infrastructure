@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+REPO_DIR=$(dirname "$BASE_DIR")
+
 CONNECTION="$(az storage account show-connection-string --name $STORAGE_NAME --resource-group $RESOURCE_GROUP --output tsv)"
 # ADMIN_URL instead of this: CDN_HOSTNAME="$(az cdn endpoint show --name $CDN_API_ENDPOINT_NAME --profile-name $CDN_NAME --resource-group $RESOURCE_GROUP | jq -r '.hostName')"
 FQDN="$(az network public-ip show -g $RESOURCE_GROUP -n $API_IP_NAME --query "{ fqdn: dnsSettings.fqdn }" | jq -r '.fqdn')"
@@ -68,21 +72,17 @@ echo "DEBUG_EMAIL=$DEBUG_EMAIL" >> .tmp/env
 echo "PRODUCTION=$PRODUCTION" >> .tmp/env
 echo "FDRS_CREDENTIAL=$FDRS_CREDENTIAL" >> .tmp/env
 echo "FDRS_APIKEY=$FDRS_APIKEY" >> .tmp/env
+echo "GO_VERSION=$GO_VERSION" >> .tmp/env
 
 #echo "BULK_IMPORT=1" >> .tmp/env
 
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
+scp -i .tmp/key $REPO_DIR/docker-compose-prod.yml $API_ADMIN@$IP:docker-compose.yml
 scp -i .tmp/key .tmp/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
 scp -i .tmp/key .tmp/ifrcgoapi.key $API_ADMIN@$IP:.ifrcgoapi.key
 ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
-  docker pull ifrcgo/go-api:${GO_VERSION}
-  docker stop \$(docker ps -q)
-  docker rm \$(docker ps -a -q)
-  docker run -v \$(pwd)/.ifrcgoapi.crt:/etc/ssl/server.pem \\
-             -v \$(pwd)/.ifrcgoapi.key:/etc/ssl/serverkey.pem \\
-             -v \$(pwd)/go-logs:/home/ifrc/logs \\
-             -p 80:80 -p 443:443 --env-file .env \\
-             --entrypoint /usr/local/bin/runserver.sh -t -d ifrcgo/go-api:${GO_VERSION}
+  docker-compose pull
+  docker-compose up -d
 EOF
 
 rm .tmp/env
