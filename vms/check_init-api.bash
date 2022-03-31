@@ -1,4 +1,5 @@
 cut -d'"' -f2 init-api.sh|grep '\$'|grep -v scp|grep -v ssh|grep -v '^ '|grep -v "(" |\
+grep -v '^#' |\
 grep -v AZURE_STORAGE_ACCOUNT |\
 grep -v AZURE_STORAGE_KEY |\
 grep -v BASE_DIR |\
