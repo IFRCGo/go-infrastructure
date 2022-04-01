@@ -1,0 +1,2 @@
+container=$(docker ps|grep _api_|cut -d' ' -f1)
+docker exec -it $container bash
