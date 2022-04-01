@@ -1,0 +1,5 @@
+#./schemacp
+#echo "=== database schema diagram copied ==="
+docker rmi $(docker images|grep ifrcgo|sed 's/ \+/ /g'|cut -d' ' -f3|head -n 4|tail -n 1)
+docker images
+docker ps
