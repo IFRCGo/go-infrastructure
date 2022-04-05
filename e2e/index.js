@@ -67,3 +67,19 @@ export const loginUI = () => {
   cy.get('#login-password').type(password)
   cy.get('.form__footer > .button > span').click()
 }
+
+export const loginHere = () => {
+  const username = Cypress.env('levi')
+  const password = Cypress.env('secretlevi')
+
+  // it is ok for the username to be visible in the Command Log
+  expect(username, 'username was set').to.be.a('string').and.not.be.empty
+  // but the password value should not be shown
+  if (typeof password !== 'string' || !password) {
+    throw new Error('Missing password value, set using CYPRESS_secret=...')
+  }
+  cy.get('#login-username').type(username)
+  cy.get('#login-password').type(password)
+  cy.get('.form__footer > .button > span').click()
+}
+
