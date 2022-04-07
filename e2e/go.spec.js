@@ -106,8 +106,8 @@ context('Actions', () => {
     cy.contains('#appeals > .container-lg > .fold__header > .fold__header__block > .fold__title', 'Active IFRC Operations')
     cy.get('#react-tabs-6').click()  // REGIONAL PROFILE
     cy.contains('.regional-profile-subtitle', 'National Societies in Middle East & North Africa')
-    cy.get('#react-tabs-8').click()  // PREPAREDNES
-    cy.contains('.snippet_item > a','How we engage')
+    //? cy.get('#react-tabs-8').click()  // PREPAREDNES
+    //? cy.contains('.snippet_item > a','How we engage')
     //cy.expect(localStorage.getItem('user'))  // has...
   })
 
