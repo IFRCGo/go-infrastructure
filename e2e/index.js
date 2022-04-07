@@ -69,8 +69,8 @@ export const loginUI = () => {
 }
 
 export const loginHere = () => {
-  const username = Cypress.env('levi')
-  const password = Cypress.env('secretlevi')
+  const username = Cypress.env('some')
+  const password = Cypress.env('secret')
 
   // it is ok for the username to be visible in the Command Log
   expect(username, 'username was set').to.be.a('string').and.not.be.empty
