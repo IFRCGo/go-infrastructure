@@ -8,7 +8,7 @@ perl -pi -w -e 's/ugettext_lazy/gettext_lazy/' $(grep -lr ugettext_lazy 2>/dev/n
 perl -pi -w -e 's/ugettext/gettext/' $(grep -lr ugettext 2>/dev/null|grep py$)
 perl -pi -w -e 's/\.value//;s/str\(current_status\)/current_status.label/' deployments/test_views.py
 perl -pi -w -e 's/\.value\)/\)/' deployments/serializers.py
-
+perl -pi -w -e 's/str\(self.name.label\)/self.label/' api/models.py
 
 exit 0
 
