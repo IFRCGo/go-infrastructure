@@ -1,0 +1,82 @@
+#!/bin/bash
+cd go-api; git stash
+
+perl -pi -w -e 's/.CHOICES/.choices/' flash_update/factories.py deployments/factories/project.py
+perl -pi -w -e 's/SectorTags.choices\(\)/SectorTags.choices/' deployments/models.py
+perl -pi -w -e 's/from django.urls import path/from django.urls import path, re_path/' main/urls.py
+perl -pi -w -e 's/ugettext_lazy/gettext_lazy/' $(grep -lr ugettext_lazy 2>/dev/null|grep py$)
+perl -pi -w -e 's/ugettext/gettext/' $(grep -lr ugettext 2>/dev/null|grep py$)
+perl -pi -w -e 's/\.value//;s/str\(current_status\)/current_status.label/' deployments/test_views.py
+perl -pi -w -e 's/\.value\)/\)/' deployments/serializers.py
+
+
+exit 0
+
+----- (first changes without test fixes) ---
+p=go-api/api;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+f=forms.py;  php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/notifications;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/registrations;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/per;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/dref;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/deployments;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/flash_update;
+f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+f=forms.py;  php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+p=go-api/lang;
+f=serializers.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+#skip intentionally - no enum in it - p=go-api/databank;
+#f=models.py; php to3.2.php -f $p/$f; mv out $p/$f; grep -li enum $p/migrations/* 2>/dev/null|xargs -iQ bash -c "php to3.2.php -f Q; mv out Q"
+
+# deployment nem kell
+f=go-api/dref/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/per/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/lang/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/registrations/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/notifications/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/flash_update/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/databank/apps.py; php to3.2.php -f $f; mv out $f
+f=go-api/api/apps.py; php to3.2.php -f $f; mv out $f
+
+
+f=go-api/deployments/serializers.py; php to3.2.php -f $f; mv out $f
+f=go-api/dref/serializers.py; php to3.2.php -f $f; mv out $f
+f=go-api/per/serializers.py; php to3.2.php -f $f; mv out $f
+f=go-api/notifications/serializers.py; php to3.2.php -f $f; mv out $f
+f=go-api/flash_update/serializers.py; php to3.2.php -f $f; mv out $f
+f=go-api/api/serializers.py; php to3.2.php -f $f; mv out $f
+
+f=go-api/deployments/drf_views.py; php to3.2.php -f $f; mv out $f
+f=go-api/api/drf_views.py; php to3.2.php -f $f; mv out $f
+f=go-api/api/management/commands/sync_molnix.py; php to3.2.php -f $f; mv out $f
+
+f=go-api/api/admin.py; php to3.2.php -f $f; mv out $f
+f=go-api/deployments/filters.py; php to3.2.php -f $f; mv out $f
+f=go-api/deployments/forms.py; php to3.2.php -f $f; mv out $f
+f=go-api/deployments/models.py; php to3.2.php -f $f; mv out $f
+
+f=go-api/main/settings.py; php to3.2.php -f $f; mv out $f
+
+perl -pi -w -e 's/from django.contrib.postgres.fields import JSONField/from django.db.models import JSONField/' $(grep -ilr 'from django.contrib.postgres.fields import JSONField' go-api 2>/dev/null|grep "py$")
+perl -pi -w -e 's/django.contrib.postgres.fields.jsonb.JSONField/django.db.models.JSONField/g' $(grep -ilr 'django.contrib.postgres.fields.jsonb.JSONField' go-api 2>/dev/null|grep "py$")
+perl -pi -w -e 's/NullBooleanField/BooleanField/g' $(grep -ilr nullbooleanfield go-api 2>/dev/null|grep "py$")
+perl -pi -w -e 's/choices=OrgTypes,/choices=OrgTypes.choices, default=OrgTypes.OTHR,/' go-api/api/models.py
+perl -pi -w -e 's/from django.db import migrations\n/from django.db import models, migrations\n/' $(grep -ilr 'from django.db import migrations$' go-api/*/migrations/*py 2>/dev/null)
+# This ^ latter is a bit too hard, so afterwards I fixed via collecting files:
+# grep -irl                      'models, migrations'  | sort -u > /tmp/v1
+# grep -l 'models\.' $(grep -irl 'models, migrations') | sort -u > /tmp/v2
+# perl -pi -w -e 's/from django.db import models, migrations/from django.db import migrations/' $(comm1 /tmp/v1 /tmp/v2)
