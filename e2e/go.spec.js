@@ -88,10 +88,9 @@ context('Actions', () => {
     cy.get('.button--secondary-filled').click()
     cy.get('.button--secondary-filled').click()
     cy.get('.button--secondary-filled').click()
-    cy.get(':nth-child(5) > .styles_section-content__3E58e > .styles_radio-input__3ArJz > .styles_radio-list-container__WLomQ > :nth-child(3) > .styles_icons__3T5yJ > .styles_icon__HI6JB')
-    .click()
+    // Why this does not work? Changes permission level? v
+    // cy.get(':nth-child(5) > .styles_section-content__3E58e > .styles_radio-input__3ArJz > .styles_radio-list-container__WLomQ > :nth-child(3) > .styles_icons__3T5yJ > .styles_icon__HI6JB')    .click()
     cy.get('.styles_actions__1KZul > .button--primary-filled').click()
-    cy.wait(300)
     cy.contains('.inpage__title', 'ESP: Drought - 2022-01 - Example Field Report')
   })
 
