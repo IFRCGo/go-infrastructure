@@ -1,0 +1,45 @@
+========================================= STAGING
+#!/bin/bash
+./check_init-api.bash
+if [[ $(./check_init-api.bash) ]]; then
+    echo -e "\n\n*** Check init-api!!! (Ctrl+C)"
+    read a
+    exit 1
+fi
+clear
+echo "Végén ne feledd: database diagram!"
+# echo "Is there manually deployed job out? (if so, ctrl+C) [Enter]"
+# read a
+. getEnv.sh
+. .tmp/.env
+. setVars.sh # former login.sh
+. Getkey.sh
+. setPrompt
+clear -x
+. init-api.sh
+echo "=========== after deployment ========="
+. connect-api.sh
+rm .tmp/.env
+========================================= PROD
+#!/bin/bash
+./check_init-api.bash
+if [[ $(./check_init-api.bash) ]]; then
+    echo -e "\n\n*** Check init-api!!! (Ctrl+C)"
+    read a
+    exit 1
+fi
+clear
+echo "Please edit GO_VERSION=... manually."
+# echo "Is there manually deployed job out? (if so, ctrl+C) [Enter]"; read a
+. getEnv.sh
+#Edit version in an other window or on Azure [Enter]"; read a
+nano .tmp/.env
+. .tmp/.env
+. setVars.sh # former login.sh
+. Getkey.sh
+. setPrompt
+clear -x
+. init-api.sh
+echo "=========== after deployment ========="
+. connect-api.sh
+rm .tmp/.env
