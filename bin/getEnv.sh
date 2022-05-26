@@ -21,7 +21,7 @@ az storage blob download \
   --file .tmp/.env
 
 # echo "*** Local cp env file instead of 'az storage blob download'... ***"
-# cat ../.env > .tmp/.env
+# cat env > .tmp/.env
 =================================================================== PROD
 #!/bin/bash
 
@@ -45,4 +45,4 @@ az storage blob download \
   --file .tmp/.env
 
 # echo "*** Local cp env file instead of 'az storage blob download'... ***"
-# cat ../.env > .tmp/.env
+# cat env > .tmp/.env
