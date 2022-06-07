@@ -4,8 +4,8 @@ cd go-api; git stash
 perl -pi -w -e 's/.CHOICES/.choices/' flash_update/factories.py deployments/factories/project.py
 perl -pi -w -e 's/SectorTags.choices\(\)/SectorTags.choices/' deployments/models.py
 perl -pi -w -e 's/from django.urls import path/from django.urls import path, re_path/' main/urls.py
-perl -pi -w -e 's/ugettext_lazy/gettext_lazy/' $(grep -lr ugettext_lazy 2>/dev/null|grep py$)
-perl -pi -w -e 's/ugettext/gettext/' $(grep -lr ugettext 2>/dev/null|grep py$)
+perl -pi -w -e 's/ugettext_lazy/gettext_lazy/g' $(grep -lr ugettext_lazy 2>/dev/null|grep py$)
+perl -pi -w -e 's/ugettext/gettext/g' $(grep -lr ugettext 2>/dev/null|grep py$)
 perl -pi -w -e 's/\.value//;s/str\(current_status\)/current_status.label/' deployments/test_views.py
 perl -pi -w -e 's/\.value\)/\)/' deployments/serializers.py
 perl -pi -w -e 's/str\(self.name.label\)/self.label/' api/models.py
