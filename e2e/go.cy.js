@@ -113,11 +113,10 @@ context('Actions', () => {
     login()
     cy.get('.nav-global-menu > :nth-child(3) > a > span').click()
     cy.contains('.inpage__title > span', 'Emergencies in the last 30 days')
-    cy.get('.inner--emergencies-table-map > .fold > .container-lg > .fold__body > .table > tbody > :nth-child(1) > .table__cell--name > .link--table').click()
-    cy.contains('.container-mid > .box__global > .heading__title', 'Emergency Overview')
-    cy.get('#react-tabs-2').click()
-    cy.contains('.fold__title','Reports')
-
+    //cy.get('.inner--emergencies-table-map > .fold > .container-lg > .fold__body > .table > tbody > :nth-child(1) > .table__cell--name > .link--table').click()
+    //cy.contains('.container-mid > .box__global > .heading__title', 'Emergency Overview')
+    //cy.get('#react-tabs-2').click()
+    //cy.contains('.fold__title','Reports')
   })
 
   //it('checks resources', () => {
