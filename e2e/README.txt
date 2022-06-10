@@ -7,7 +7,8 @@ So it is possible to upgrade Cypress core without touching the GO-related files.
 Recently we use cypress 10.0.3.
 
 First start: unzip cypress.zip, then run: Cypress/Cypress
-If there is an old config somewhere (e.g. .config/Cypress), it should be removed before, and maybe a https://docs.cypress.io/guides/guides/command-line#cypress-run cypress cache clear command is also useful in case of a bigger upgrade.
+If there is an old config somewhere (e.g. .config/Cypress), it should be removed before, and maybe a 
+https://docs.cypress.io/guides/guides/command-line#cypress-run discussed "cypress cache clear" command is useful in case of a bigger upgrade.
 The e2e.js file should be in "cypress/support" directory,
 go.cy.js in "cypress/integration/3-own",
 and cypress.json in the root ("cypress").
