@@ -11,7 +11,7 @@ If there is an old config somewhere (e.g. .config/Cypress), it should be removed
 https://docs.cypress.io/guides/guides/command-line#cypress-run discussed "cypress cache clear" command is useful in case of a bigger upgrade.
 The e2e.js file should be in "cypress/support" directory,
 go.cy.js in "cypress/integration/3-own",
-and cypress.json in the root ("cypress").
+and cypress.config.js in the root ("cypress").
 
 A demo run and some practical advice can be seen here: https://ifrcorg.sharepoint.com/sites/GOIVfordeveloperteam/Shared%20Documents/General/GO%20developer%20onboarding/Cypress%20test%20automation/cypress1.mp4
 or the same: https://porgeto.hu/cypress1.mp4
