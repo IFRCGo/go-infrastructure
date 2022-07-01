@@ -119,6 +119,41 @@ context('Actions', () => {
     //cy.contains('.fold__title','Reports')
   })
 
+  it('checks PER overview form creation', () => {
+    loginUI()
+    cy.get('.page__meta-nav > .drop__toggle').click()
+    cy.get(':nth-child(1) > .drop__menu-item').click()
+    cy.contains('.inpage__title', 'Hello ')
+    cy.get('#react-tabs-4').click({force: true})  // PER Forms
+    cy.contains('.fold__title', 'Completed PER Assessments')
+    cy.get('.text-center > .button').click({force: true})
+    cy.get('#react-tabs-10')  // overview
+    cy.contains(':nth-child(2) > figcaption > .fold__title > span', 'Current PER Assessment')
+    cy.get('#country_id > .css-yk16xz-control > .css-g1d714-ValueContainer')  // National Society
+    .type('Austrian{enter}')
+    cy.get('#date_of_assessment')
+    .type('2022-07-01')
+    cy.get('#type_of_assessment > .css-yk16xz-control > .css-g1d714-ValueContainer')  // Type of assassment
+    .type('Ope{enter}')
+    cy.get('#date_of_mid_term_review')
+    .type('2022-08-01')
+    cy.get('#date_of_next_asmt')
+    .type('2022-09-01')
+    cy.get('#facilitator_name')
+    .type('Browser Cru{enter}')
+    cy.get('#facilitator_email')
+    .type('browser@cru.qw{enter}')
+    cy.get('#facilitator_phone')
+    .type('11 11119{enter}')
+    cy.get('.text-center > .button').click()  // follow the forms
+    cy.contains('.h3 > span', 'Overview')
+    cy.scrollTo(100, 100) 
+    cy.wait(4000)  // without this the save button can not be seen. Or shall we trace modal popup?
+    cy.get('.react-tabs > .text-right > .button > span').click({force: true})  // save
+    cy.get('.per-inpage__header > .text-right > .button--primary-filled > span').click({force: true})  // final submit
+    cy.get('.tc-footer > .button--primary-filled').click({force: true})  // confirm
+  })
+
   //it('checks resources', () => {
   //  cy.visit('http://localhost:3000/about/')
   //})
