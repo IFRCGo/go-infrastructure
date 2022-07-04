@@ -6,7 +6,7 @@
 // https://github.com/cypress-io/cypress-realworld-app | https://www.cypress.io/blog/2020/06/11/introducing-the-cypress-real-world-app/
 // https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command/
 
-import { login, loginUI, loginGOAdmin, urlExists } from '../../support/e2e.js'
+import { login, loginUI, loginHere, loginGOAdmin, urlExists } from '../../support/e2e.js'
 
 context('Actions', () => {
   beforeEach(() => {
