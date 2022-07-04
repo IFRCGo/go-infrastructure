@@ -6,7 +6,7 @@
 // https://github.com/cypress-io/cypress-realworld-app | https://www.cypress.io/blog/2020/06/11/introducing-the-cypress-real-world-app/
 // https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command/
 
-import { login, loginUI, loginHere, urlExists } from '../../support/e2e.js'
+import { login, loginUI, loginGOAdmin, urlExists } from '../../support/e2e.js'
 
 context('Actions', () => {
   beforeEach(() => {
@@ -17,6 +17,23 @@ context('Actions', () => {
   Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  it('checks backend', () => {
+    loginGOAdmin()
+    cy.visit('http://localhost:8000/en/per/overview/')
+    cy.get('#djHideToolBarButton').click()
+    cy.get('#searchbar').type('Alger')
+    cy.get('#changelist-search > div > [type="submit"]').click()
+    cy.contains('.field-__str__ > a', 'Algerian Red Crescent')
+    cy.visit('http://localhost:8000/en/per/form/')
+    cy.get('#searchbar').type('Oper')
+    cy.get('#changelist-search > div > [type="submit"]').click()
+    cy.contains(':nth-child(1) > .field-area > a', 'Operations support')
+    cy.visit('http://localhost:8000/en/api/country/')
+    cy.get('#searchbar').type('democrat')
+    cy.get('#changelist-search > div > [type="submit"]').click()
+    cy.contains('.field-__str__ > a', 'Republic of Korea')
+  })
 
   it('checks recover-account', () => {
     cy.visit('http://localhost:3000/recover-account')
