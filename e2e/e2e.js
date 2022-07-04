@@ -78,9 +78,25 @@ export const loginHere = () => {
   if (typeof password !== 'string' || !password) {
     throw new Error('Missing password value, set using CYPRESS_secret=...')
   }
+  // differs from loginUI: we do not give location here
   cy.get('#login-username').type(username)
   cy.get('#login-password').type(password)
   cy.get('.form__footer > .button > span').click()
+}
+
+export const loginGOAdmin = () => {
+  const username = Cypress.env('some')
+  const password = Cypress.env('secret')
+
+  expect(username, 'username was set').to.be.a('string').and.not.be.empty
+  if (typeof password !== 'string' || !password) {
+    throw new Error('Missing password value, set using CYPRESS_secret=...')
+  }
+
+  cy.visit('http://localhost:8000/en/login/')
+  cy.get('#id_username').type(username)
+  cy.get('#id_password').type(password)
+  cy.get('.submit-row > input').click()
 }
 
 export const urlExists = (url, callback) => { // stackoverflow.com/questions/1591401/javascript-jquery-check-broken-links
