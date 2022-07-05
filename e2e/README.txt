@@ -13,7 +13,7 @@ The e2e.js file should be in "cypress/support" directory,
 go.cy.js in "cypress/integration/3-own",
 and cypress.config.js in the root ("cypress").
 At first runs of cypress tests I suggest to comment out the 'checks backend' part via /*   */  in go.cy.js
-
+You need a running GO frontend server on your local machine to run the tests.
 
 A demo run and some practical advice can be seen here: https://ifrcorg.sharepoint.com/sites/GOIVfordeveloperteam/Shared%20Documents/General/GO%20developer%20onboarding/Cypress%20test%20automation/cypress1.mp4
 or the same: https://porgeto.hu/cypress1.mp4
