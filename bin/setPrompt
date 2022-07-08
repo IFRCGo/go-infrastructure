@@ -1,0 +1,9 @@
+=================================================================== STAGING
+#!/bin/bash
+export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33'
+PS1='\e[33;1m === STAGING ===: \e[31m\W\e[0m\$ '
+=================================================================== PROD
+#!/bin/bash
+export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33'
+bgMag=$(tput setab 5)
+PS1='${bgMag}\e[31;1m ====== PRODUCTION ======: \e[31m\W\e[0m\$ '
