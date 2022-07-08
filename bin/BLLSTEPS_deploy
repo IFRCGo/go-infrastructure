@@ -13,7 +13,7 @@ echo "Végén ne feledd: database diagram!"
 . getEnv.sh
 . .tmp/.env
 . setVars.sh # former login.sh
-. Getkey.sh
+. getkey.sh  # later: Getkey.sh
 . setPrompt
 clear -x
 . init-api.sh
@@ -36,7 +36,7 @@ echo "Please edit GO_VERSION=... manually."
 nano .tmp/.env
 . .tmp/.env
 . setVars.sh # former login.sh
-. Getkey.sh
+. getkey.sh  # later: Getkey.sh
 . setPrompt
 clear -x
 . init-api.sh
