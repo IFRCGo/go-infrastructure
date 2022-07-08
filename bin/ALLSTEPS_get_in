@@ -2,7 +2,7 @@
 . getEnv.sh
 . .tmp/.env
 . setVars.sh # former login.sh
-. Getkey.sh
+. getkey.sh  # later: Getkey.sh
 . setPrompt
 . connect-api.sh
 rm .tmp/.env
