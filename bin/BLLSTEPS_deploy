@@ -7,7 +7,7 @@ if [[ $(./check_init-api.bash) ]]; then
     exit 1
 fi
 clear
-echo "Végén ne feledd: database diagram!"
+# echo "Do not forget: run ./r to cp database diagram!"
 # echo "Is there manually deployed job out? (if so, ctrl+C) [Enter]"
 # read a
 . getEnv.sh
