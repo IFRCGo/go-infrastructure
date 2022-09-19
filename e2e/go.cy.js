@@ -17,7 +17,7 @@ context('Actions', () => {
   Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   });
-
+/*
   it('checks backend', () => {
     loginGOAdmin()
     cy.visit('http://localhost:8000/en/per/overview/')
@@ -34,12 +34,11 @@ context('Actions', () => {
     cy.get('#changelist-search > div > [type="submit"]').click()
     cy.contains('.field-__str__ > a', 'Republic of Korea')
   })
-
+*/
   it('checks recover-account', () => {
     cy.visit('http://localhost:3000/recover-account')
     cy.contains('.inpage__title', 'Recover Account')
   })
-
   it('checks a 3W endpoint', () => {
     cy.visit('http://localhost:3000/three-w')
     cy.contains('.styles_heading__2SPPb', 'Global 3W Response')
@@ -52,7 +51,7 @@ context('Actions', () => {
     cy.get('.link--with-icon-text').click() // All countries
     cy.get(':nth-child(1) > .region-countries__link > .region-countries__linkC').click() // First one
     //cy.get('a[href="/foo"]').should('have.attr', 'target', '_blank')
-    cy.get(':nth-child(1) > .pill__brand').then(($el)=>{
+    cy.get(':nth-child(2) > .pill__brand').then(($el)=>{
       //$el.get(0).click();
       //console.log("this is it!")
       //debugger
@@ -69,13 +68,13 @@ context('Actions', () => {
     //cy.contains('#ns-data-wrapper > div.ns-directory-header > div > div.col-4.page-hero__title-block > h2','Albanian Red Cross')
 
   })
-
   it('logs in via UI', () => {
     loginUI()
 //    cy.contains('.page__meta-nav > .drop__toggle > span', 'test user')
     cy.contains('.page__meta-nav > .drop__toggle > span', 'Levente Otta')
-    cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret > span').click()
+    cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret').click()
     cy.get(':nth-child(4) > .drop__menu-item').click()
+    cy.wait(5000) 
     cy.contains('.inpage__title', 'Europe')
     cy.get('#react-tabs-0').click() // OPERATIONS
     cy.contains('.inner--emergencies > .fold > .container-lg > .fold__header > .fold__header__block > .fold__title', 'Highlighted Operations')
@@ -86,7 +85,7 @@ context('Actions', () => {
   it('checks field report creation', () => {
     cy.visit('http://localhost:3000/reports/new/')
     loginHere()
-    cy.wait(300)
+    cy.wait(2000)
     // cy.contains('.styles_heading__2SPPb', 'create field report')
     cy.get(':nth-child(4) > .styles_section-content__3E58e > :nth-child(1) > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__value-container')
     .type('Spain{enter}')
@@ -108,15 +107,17 @@ context('Actions', () => {
     // Why this does not work? Changes permission level? v
     // cy.get(':nth-child(5) > .styles_section-content__3E58e > .styles_radio-input__3ArJz > .styles_radio-list-container__WLomQ > :nth-child(3) > .styles_icons__3T5yJ > .styles_icon__HI6JB')    .click()
     cy.get('.styles_actions__1KZul > .button--primary-filled').click()
-    cy.wait(1000)  // maybe can be omitted
+    cy.wait(2500)  // maybe can be omitted
     cy.contains('.inpage__title', 'ESP: Drought - 2022-01 - Example Field Report')
   })
 
 //  it('logs in using cy.request', () => {
   it('logs in again', () => {
     login()
+    cy.wait(1000)  // maybe can be omitted
     cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret > span').click()
     cy.get(':nth-child(5) > .drop__menu-item').click()
+    cy.wait(1000)  // maybe can be omitted
     cy.contains('.inpage__title', 'Middle East & North Africa')
     cy.get('#react-tabs-0').click()  // OPERATIONS
     cy.contains('#appeals > .container-lg > .fold__header > .fold__header__block > .fold__title', 'Active IFRC Operations')
@@ -172,8 +173,7 @@ context('Actions', () => {
     cy.get('.tc-footer > .button--primary-filled').click({force: true})  // confirm
   })
 
-  //it('checks resources', () => {
-  //  cy.visit('http://localhost:3000/about/')
-  //})
+  it('checks resources', () => {
+    cy.visit('http://localhost:3000/about/')
+  })
 })
-
