@@ -38,7 +38,8 @@ export const login = () => {
   cy.request({
     method: 'POST',
     // url: 'https://dsgocdnapi.azureedge.net/get_auth_token',
-    url: 'http://localhost:8000/get_auth_token',
+    // url: 'http://localhost:8000/get_auth_token',
+    url: Cypress.env('backendUrl') + 'get_auth_token',
     form: true,
     body: {
       username,
