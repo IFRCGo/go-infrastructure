@@ -35,10 +35,12 @@ context('Actions', () => {
     cy.contains('.field-__str__ > a', 'Republic of Korea')
   })
 */
+
   it('checks recover-account', () => {
     cy.visit('http://localhost:3000/recover-account')
     cy.contains('.inpage__title', 'Recover Account')
   })
+
   it('checks a 3W endpoint', () => {
     cy.visit('http://localhost:3000/three-w')
     cy.contains('.styles_heading__2SPPb', 'Global 3W Response')
@@ -68,6 +70,7 @@ context('Actions', () => {
     //cy.contains('#ns-data-wrapper > div.ns-directory-header > div > div.col-4.page-hero__title-block > h2','Albanian Red Cross')
 
   })
+
   it('logs in via UI', () => {
     loginUI()
 //    cy.contains('.page__meta-nav > .drop__toggle > span', 'test user')
@@ -171,6 +174,32 @@ context('Actions', () => {
     cy.get('.react-tabs > .text-right > .button > span').click({force: true})  // save
     cy.get('.per-inpage__header > .text-right > .button--primary-filled > span').click({force: true})  // final submit
     cy.get('.tc-footer > .button--primary-filled').click({force: true})  // confirm
+  })
+
+  it('checks a 3W Project detail page (from a country)', () => {
+    login()
+    cy.visit('http://localhost:3000', )
+    cy.get('.nav-global-menu > :nth-child(2) > .drop__toggle--caret ').click() // Regions
+    cy.get(':nth-child(4) > .drop__menu-item').click() // Europe
+    cy.get('.link--with-icon-text').click() // All Countries
+    cy.get(':nth-child(3) > .region-countries__link > .region-countries__linkC').click() // Armenia
+    cy.get('#react-tabs-12').click() // 3W tab
+    cy.get('.tertiary > .styles_children__1l7sq').click() // View all projects in Armania
+    cy.get(':nth-child(1) > :nth-child(9) > .styles_cell-component__X8BKz > .tc-dropdown-menu > svg').click()  // ...
+    cy.get('[href="/three-w/382/"] > .styles_label__1BYYR').click()  // view
+    cy.contains('.styles_content__3Dmca > :nth-child(2) > :nth-child(1) > .styles_value__H9ELs', 'Emergency Operation')
+    cy.get(':nth-child(1) > .styles_link__1UvHv > :nth-child(1)').click()  // Link to Armenia
+    cy.contains('.inpage__title', 'Armenia')
+  })
+
+  it('checks another 3W Project detail page (from all)', () => {
+    login()
+    cy.visit('http://localhost:3000/three-w/all/', )
+    cy.get(':nth-child(4) > :nth-child(10) > .styles_cell-component__X8BKz > .tc-dropdown-menu > svg').click()  // MRCS COVID 19 Response operation
+
+    cy.get('[href="/three-w/499/"] > .styles_label__1BYYR').click()  // view
+    cy.contains(':nth-child(8) > :nth-child(1) > :nth-child(2) > .styles_row__2GI6L > :nth-child(1) > .styles_value__H9ELs > .styles_numeral__3T9Ob > .styles_number__1dBjx', '1,550,000')
+    // cy.get('.styles_children__1l7sq').click()  // edit does not work, neither login, neither via loginUI
   })
 
   it('checks resources', () => {
