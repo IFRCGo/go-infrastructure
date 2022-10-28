@@ -202,6 +202,27 @@ context('Actions', () => {
     // cy.get('.styles_children__1l7sq').click()  // edit does not work, neither login, neither via loginUI
   })
 
+  it('DREF creating test', () => {
+    loginUI()
+    cy.wait(1000)  // maybe can be omitted
+    cy.get('.page__meta-nav > .button > span').click()
+    cy.get('[href="/dref-application/new"]').click()
+    cy.contains('.styles_heading__2SPPb', 'DREF Application')
+    cy.get('.styles_one-column__27mSe > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__value-container')
+    .type('Spanish{enter}')
+    cy.get(':nth-child(3) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__value-container')
+    .type('ESP: Drought').type('{enter}{enter}', {delay: 2000}) // could be smaller? TODO
+
+    cy.get(':nth-child(3) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__indicators > .go__indicator > .css-tj5bde-Svg')
+    cy.get('.styles_actions__VVCYp > .styles_raw-button__31FaH > .styles_children__1l7sq').click() // Copy
+    cy.get(':nth-child(9) > .styles_section-content__3E58e > .styles_radio-input__3ArJz > .styles_radio-list-container__WLomQ > :nth-child(2) > .styles_icons__3T5yJ > .styles_icon__HI6JB').click()  // no planned em. appeal
+    cy.get(':nth-child(4) > .styles_section-content__3E58e > :nth-child(2) > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__value-container').type('Imminent{enter}')
+    cy.get(':nth-child(6) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .go-raw-input').type('Example dREF for e2e test{enter}')
+    cy.get(':nth-child(6) > .styles_raw-button__31FaH').click()
+    cy.get('.styles_actions__3wo-B > :nth-child(2) > .styles_children__1l7sq').click()
+    cy.get('.styles_actions__1HIHe > .styles_raw-button__31FaH > .styles_children__1l7sq').click()
+  })
+
   it('checks resources', () => {
     cy.visit('http://localhost:3000/about/')
   })
