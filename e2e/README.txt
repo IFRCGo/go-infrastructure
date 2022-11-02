@@ -4,7 +4,7 @@ The direct download (https://download.cypress.io/desktop) is the simplest way re
 
 The GO-related files and the Cypress core infrastructure are in two distinct directories.
 So it is possible to upgrade Cypress core without touching the GO-related files.
-Recently we use cypress 10.3.0.
+Recently we use cypress 10.11.0.
 
 First start: unzip cypress.zip, then run: Cypress/Cypress
 If there is an old config somewhere (e.g. .config/Cypress), it should be removed before, and maybe a 
@@ -13,7 +13,7 @@ The e2e.js file should be in "cypress/support" directory,
 go.cy.js in "cypress/integration/3-own",
 and cypress.config.js in the root ("cypress").
 At first runs of cypress tests I suggest to comment out the 'checks backend' part via /*   */  in go.cy.js
-You need a running GO frontend server on your local machine to run the tests.
+You need a running GO frontend server on your local machine to run the tests. And a user, having "PER Core Admins" group membership.
 
 A demo run and some practical advice can be seen here: https://ifrcorg.sharepoint.com/sites/GOIVfordeveloperteam/Shared%20Documents/General/GO%20developer%20onboarding/Cypress%20test%20automation/cypress1.mp4
 or the same: https://porgeto.hu/cypress1.mp4
