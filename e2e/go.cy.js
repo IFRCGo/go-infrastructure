@@ -223,6 +223,12 @@ context('Actions', () => {
     cy.get('.styles_actions__1HIHe > .styles_raw-button__31FaH > .styles_children__1l7sq').click()
   })
 
+  it('checks a Country Plan', () => {
+    cy.visit('http://localhost:3000/countries/101#country-plan', )
+    cy.contains('.styles_heading__3oOXb > span', 'Lebanon Country Plan')
+    cy.contains(':nth-child(3) > .styles_main-content__39WkO > .styles_description__3ox0O > span', 'People Targeted')
+  })
+
   it('checks resources', () => {
     cy.visit('http://localhost:3000/about/')
   })
