@@ -36,6 +36,18 @@ context('Actions', () => {
   })
 */
 
+  it('checks regional risk page, imminent part', () => {
+    cy.visit('http://localhost:3000/regions/2#risk-watch')
+    cy.get('[name="imminent"]').click()
+    //not relevant, can be seen also when not risk connection: cy.contains('.styles_description__2PLMK > div', 'This map displays')
+    cy.contains('.styles_text__1ArTa', 'No imminent events').should('not.exist');
+  })
+
+  it('checks country risk page', () => {
+    cy.visit('http://localhost:3000/countries/14#risk')
+    cy.contains('.styles_legend-title__3eGMJ', 'Severity')
+  })
+
   it('checks recover-account', () => {
     cy.visit('http://localhost:3000/recover-account')
     cy.contains('.inpage__title', 'Recover Account')
