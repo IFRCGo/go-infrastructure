@@ -19,6 +19,6 @@ ssh -i .tmp/key -o StrictHostKeychecking=no $API_ADMIN@$IP /bin/bash << EOF
 # docker run -d -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.21 - for django-haystack:
   docker run -d -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.0.0
 EOF
-# if you upgrade elasticsearch version, a manage.py create_index is also needed, and keep synched with go-api requirements.txt
+# if you upgrade elasticsearch version, a manage.py create_index is also needed, and keep synched with go-api pyproject.toml
 
 rm .tmp/key
