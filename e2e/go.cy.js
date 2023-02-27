@@ -45,7 +45,8 @@ context('Actions', () => {
 
   it('checks country risk page', () => {
     cy.visit('http://localhost:3000/countries/14#risk')
-    cy.contains('.styles_legend-title__3eGMJ', 'Severity')
+    // cy.contains('.styles_legend-title__3eGMJ', 'Severity')
+    cy.contains('.styles_heading__3oOXb > span', 'Past')
   })
 
   it('checks recover-account', () => {
