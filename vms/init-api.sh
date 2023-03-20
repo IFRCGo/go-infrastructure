@@ -85,6 +85,9 @@ echo "GO_VERSION=$GO_VERSION" >> .tmp/env
 
 #echo "BULK_IMPORT=1" >> .tmp/env
 
+# Maintenance mode
+echo "DJANGO_READ_ONLY=$DJANGO_READ_ONLY" >> .tmp/env
+
 scp -i .tmp/key .tmp/env $API_ADMIN@$IP:.env
 scp -i .tmp/key $REPO_DIR/docker-compose-prod.yml $API_ADMIN@$IP:docker-compose.yml
 scp -i .tmp/key .tmp/ifrcgoapi.crt $API_ADMIN@$IP:.ifrcgoapi.crt
