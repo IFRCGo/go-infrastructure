@@ -211,7 +211,7 @@ context('Actions', () => {
     cy.get(':nth-child(4) > :nth-child(10) > .styles_cell-component__X8BKz > .tc-dropdown-menu > svg').click()  // MRCS COVID 19 Response operation
 
     cy.get('[href="/three-w/499/"] > .styles_label__1BYYR').click()  // view
-    cy.contains(':nth-child(8) > :nth-child(1) > :nth-child(2) > .styles_row__2GI6L > :nth-child(1) > .styles_value__H9ELs > .styles_numeral__3T9Ob > .styles_number__1dBjx', '1,550,000')
+    cy.contains(':nth-child(8) > :nth-child(1) > :nth-child(2) > .styles_row__2GI6L > :nth-child(1) > .styles_value__H9ELs > .styles_number-output__3NBqP > .styles_number__1dBjx', '1,550,000')
     // cy.get('.styles_children__1l7sq').click()  // edit does not work, neither login, neither via loginUI
   })
 
@@ -223,11 +223,14 @@ context('Actions', () => {
     cy.contains('.styles_heading__2SPPb', 'DREF Application')
     cy.get('.styles_one-column__27mSe > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__value-container')
     .type('Spanish{enter}')
-    cy.get(':nth-child(3) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__value-container')
+    cy.get(':nth-child(2) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__value-container')
     .type('ESP: Drought').type('{enter}{enter}', {delay: 2000}) // could be smaller? TODO
-
-    cy.get(':nth-child(3) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__indicators > .go__indicator > .css-tj5bde-Svg')
+    cy.get(':nth-child(2) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__3LJyL > .go__control > .go__indicators > .go__indicator > .css-tj5bde-Svg')
     cy.get('.styles_actions__VVCYp > .styles_raw-button__31FaH > .styles_children__1l7sq').click() // Copy
+    cy.get(':nth-child(3) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__indicators > .go__indicator > .css-tj5bde-Svg')
+    .type('{enter}') // Imminent - DREF type
+    cy.get(':nth-child(4) > .styles_section-content__3E58e > :nth-child(2) > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__indicators > .go__indicator > .css-tj5bde-Svg')
+    .type('{enter}') // Type of Onset
     cy.get(':nth-child(9) > .styles_section-content__3E58e > .styles_radio-input__3ArJz > .styles_radio-list-container__WLomQ > :nth-child(2) > .styles_icons__3T5yJ > .styles_icon__HI6JB').click()  // no planned em. appeal
     cy.get(':nth-child(4) > .styles_section-content__3E58e > :nth-child(2) > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .styles_select__1a7aA > .go__control > .go__value-container').type('Imminent{enter}')
     cy.get(':nth-child(6) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .go-raw-input').type('Example dREF for e2e test{enter}')
