@@ -65,6 +65,7 @@ echo "API_FQDN=$ADMIN_URL" >> .tmp/env
 echo "FRONTEND_URL=$FRONTEND_URL" >> .tmp/env
 echo "IS_WORKER=$IS_WORKER" >> .tmp/env
 echo "CELERY_REDIS_URL=$CELERY_REDIS_URL" >> .tmp/env
+echo "CACHE_REDIS_URL=$CACHE_REDIS_URL" >> .tmp/env
 echo "MOLNIX_API_BASE=$MOLNIX_API_BASE" >> .tmp/env
 echo "MOLNIX_USERNAME=$MOLNIX_USERNAME" >> .tmp/env
 echo "MOLNIX_PASSWORD=$MOLNIX_PASSWORD" >> .tmp/env
