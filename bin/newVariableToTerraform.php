@@ -7,8 +7,20 @@ define('isSecret', false);
 
 define('n',"\n");
 
+$fs=
+['docker-compose.yml'
+,'azure-pipelines.yml'
+,'deploy/docker-compose.yml'
+,'deploy/terraform/resources/helm-ifrcgo.tf'
+,'deploy/terraform/resources/variables.tf'
+,'deploy/terraform/main.tf'
+,'deploy/terraform/variables.tf'
+,'deploy/helm/ifrcgo-helm/values.yaml'
+,'deploy/helm/ifrcgo-helm/templates/config/secret.yaml'
+,'deploy/helm/ifrcgo-helm/templates/config/configmap.yaml'
+];
 
-$f0='docker-compose.yml'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose(STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -21,7 +33,21 @@ foreach($f_ as $i=>$f){
 rename($f1, $f0);
 
 
-$f0='deploy/docker-compose.yml'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
+fclose($STDOUT); $STDOUT = fopen($f1, 'w');
+$f_=file($f0, FILE_IGNORE_NEW_LINES);
+
+$needle1='STAGING_FRONTEND_URL';
+$needle2='PRODUCTION_FRONTEND_URL';
+foreach($f_ as $i=>$f){
+    print $f.n;
+    if     (strstr($f, $needle1)) {print("      ".variable.": $(STAGING_".variable.")".n);}
+    elseif (strstr($f, $needle2)) {print("      ".variable.": $(PRODUCTION_".variable.")".n);}
+}
+rename($f1, $f0);
+
+
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -34,20 +60,20 @@ foreach($f_ as $i=>$f){
 rename($f1, $f0);
 
 
-$f0='deploy/terraform/resources/helm-ifrcgo.tf'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
 $row=0; $needle='DEBUG_EMAIL';
 foreach($f_ as $i=>$f){
     print $f.n;
-    if (strstr($f, $needle) || $row==1) $row++;
-    if ($row==2) {print(n.'  set {'.n.'    name = "env.'.variable.'"'.n.'    value = var.'.variable.n.'  }'.n.n); $row=0;}
+    if (strstr($f, $needle) || $row==1 || $row==2) $row++;
+    if ($row==3) {print(n.'  set {'.n.'    name = "env.'.variable.'"'.n.'    value = var.'.variable.n.'  }'.n); $row=0;}
 }
 rename($f1, $f0);
 
 
-$f0='deploy/terraform/resources/variables.tf'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -60,7 +86,7 @@ foreach($f_ as $i=>$f){
 rename($f1, $f0);
 
 
-$f0='deploy/terraform/main.tf'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -72,7 +98,7 @@ foreach($f_ as $i=>$f){
 rename($f1, $f0);
 
 
-$f0='deploy/terraform/variables.tf'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -83,7 +109,7 @@ print(n.'variable "'.variable.'" {'.n.'  type = string'.n.'  default = "'.defaul
 rename($f1, $f0);
 
 
-$f0='deploy/helm/ifrcgo-helm/values.yaml'; $f1=$f0.'1';
+$f0=array_shift($fs); $f1=$f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
 
@@ -94,8 +120,9 @@ foreach($f_ as $i=>$f){
 }
 rename($f1, $f0);
 
-
-$f0 = isSecret ? 'deploy/helm/ifrcgo-helm/templates/config/secret.yaml' : 'deploy/helm/ifrcgo-helm/templates/config/configmap.yaml';
+$f0a=array_shift($fs);
+$f0b=array_shift($fs);
+$f0 = isSecret ? $f0a : $f0b;
 $f1 = $f0.'1';
 fclose($STDOUT); $STDOUT = fopen($f1, 'w');
 $f_=file($f0, FILE_IGNORE_NEW_LINES);
