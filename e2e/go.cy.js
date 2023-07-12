@@ -9,14 +9,7 @@
 import { login, loginUI, loginHere, loginGOAdmin, urlExists } from '../../support/e2e.js'
 
 context('Actions', () => {
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('sessionid, csrftoken, UILanguage')
-  })
-  // resizeobserver loop limit exceeded (can be Chrome related)
-  // https://stackoverflow.com/questions/53845493/cypress-uncaught-assertion-error-despite-cy-onuncaughtexception
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
+// should be here something like https://docs.cypress.io/api/commands/session
 /*
   it('checks backend', () => {
     loginGOAdmin()
@@ -236,7 +229,7 @@ context('Actions', () => {
     cy.get(':nth-child(6) > .styles_section-content__3E58e > .go-input-container > .go-input-internal-input-section > .styles_internal-input-container__1tC5- > .go-raw-input').type('Example dREF for e2e test{enter}')
     cy.get(':nth-child(6) > .styles_raw-button__31FaH').click()
     cy.get('.styles_actions__3wo-B > :nth-child(2) > .styles_children__1l7sq').click()
-    cy.get('.styles_actions__1HIHe > .styles_raw-button__31FaH > .styles_children__1l7sq').click()
+    //cy.get('.styles_actions__1HIHe > .styles_raw-button__31FaH > .styles_children__1l7sq').click()
   })
 
   it('checks a Country Plan', () => {
