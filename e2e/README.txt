@@ -4,7 +4,7 @@ The direct download (https://download.cypress.io/desktop) is the simplest way re
 
 The GO-related files and the Cypress core infrastructure are in two distinct directories.
 So it is possible to upgrade Cypress core without touching the GO-related files.
-Recently we use cypress 10.11.0.
+Recently we use cypress 12.17.1.
 
 First start: unzip cypress.zip, then run: Cypress/Cypress
 If there is an old config somewhere (e.g. .config/Cypress), it should be removed before, and maybe a 
