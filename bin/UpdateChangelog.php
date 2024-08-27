@@ -12,7 +12,7 @@ if (!empty($options['v'])) $v=$options['v']; else $v=''; // ver
 
 define('d',".");
 define('z',"]");
-define('a',"'");
+define('a','"');
 define('h',"#");
 define('i','"');
 define('n',"\n");
